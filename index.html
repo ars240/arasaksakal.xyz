@@ -9,31 +9,24 @@
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
-      margin:0;
-      height:100vh;
-      overflow:hidden;
-      display:grid;
-      place-items:center;
-      font-family:Inter,Arial,sans-serif;
-      color:#fff;
+      margin:0;height:100vh;overflow:hidden;
+      display:grid;place-items:center;
+      font-family:Inter,Arial,sans-serif;color:#fff;
       background: radial-gradient(circle at top, #111, #000);
     }
 
     /* snow dots */
     .snow{
-      position:fixed;
-      top:-12px;
-      border-radius:999px;
+      position:fixed;top:-12px;border-radius:999px;
       background:rgba(255,255,255,.95);
-      pointer-events:none;
-      user-select:none;
+      pointer-events:none;user-select:none;
       animation: fall linear infinite;
       box-shadow:0 0 10px rgba(255,255,255,.20);
       z-index:3;
     }
     @keyframes fall{ to{ transform:translateY(110vh); } }
 
-    /* glass card (büyütüldü) */
+    /* glass card */
     .card{
       position:relative;
       width:min(520px,92vw);
@@ -47,8 +40,8 @@
       transform-style:preserve-3d;
       transition:transform .08s linear;
       z-index:5;
-      --mx:50%;
-      --my:50%;
+      --mx:50%; --my:50%;
+      cursor:pointer;
     }
     .card::before{
       content:"";
@@ -61,24 +54,19 @@
     }
 
     .top{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:16px;
-      padding-top:6px;
+      display:flex;align-items:center;justify-content:center;
+      gap:16px;padding-top:6px;
       transform:translateZ(14px);
     }
 
     .avatar{
-      width:86px; height:86px;
-      border-radius:999px;
+      width:86px;height:86px;border-radius:999px;
       border:2px solid rgba(255,255,255,.18);
       background:
         radial-gradient(circle at 30% 25%, rgba(255,255,255,.20), transparent 45%),
         rgba(0,0,0,.25);
-      display:grid; place-items:center;
-      font-weight:700;
-      letter-spacing:.5px;
+      display:grid;place-items:center;
+      font-weight:700;letter-spacing:.5px;
       box-shadow:0 0 24px rgba(255,255,255,.10);
       overflow:hidden;
     }
@@ -87,8 +75,7 @@
     .name{
       margin:0;
       font-family:Lobster, cursive;
-      font-size:40px;
-      line-height:1;
+      font-size:40px;line-height:1;
       text-shadow:0 0 18px rgba(255,255,255,.25);
       animation: glow 2.2s ease-in-out infinite;
     }
@@ -96,9 +83,7 @@
 
     .statusRow{
       margin-top:12px;
-      display:flex;
-      justify-content:center;
-      gap:10px;
+      display:flex;justify-content:center;gap:10px;
       transform:translateZ(12px);
       opacity:.85;
     }
@@ -112,55 +97,27 @@
     .dot.mid{ background:rgba(180,170,255,.30); }
     .dot.off{ background:rgba(255,140,140,.25); }
 
-    /* robloxglobal yeri: artık boş */
-    .search{
-      margin:18px auto 0;
-      width:min(380px, 90%);
-      display:flex;
-      justify-content:center;
-      transform:translateZ(10px);
-    }
-    .search input{
-      width:100%;
-      padding:14px 16px;
-      border-radius:16px;
-      background:rgba(0,0,0,.18);
-      border:1px solid rgba(255,255,255,.12);
-      outline:none;
-      color:#fff;
-      font-size:15px;
-    }
-    .search input::placeholder{ color:rgba(255,255,255,.55); }
-
     .hint{
       margin:18px 0 0;
       text-align:center;
       font-size:12px;
       letter-spacing:2px;
       opacity:.65;
-      text-transform:uppercase;
+      text-transform:lowercase; /* ✅ hepsi küçük */
       animation: blink 1.5s infinite;
       transform:translateZ(10px);
     }
     @keyframes blink{0%,100%{opacity:.35}50%{opacity:.9}}
 
-    /* tıklama alanı */
-    .clickLayer{
-      position:absolute; inset:0;
-      border-radius:inherit;
-      cursor:pointer;
-      z-index:10;
-    }
+    .clickLayer{ position:absolute; inset:0; border-radius:inherit; z-index:10; }
   </style>
 </head>
 <body>
 
-  <div class="card" id="card">
+  <div class="card" id="card" title="tıkla">
     <div class="top">
       <div class="avatar"><span>AA</span></div>
-      <div>
-        <h1 class="name">Aras Aksakal</h1>
-      </div>
+      <div><h1 class="name">Aras Aksakal</h1></div>
     </div>
 
     <div class="statusRow">
@@ -169,12 +126,7 @@
       <div class="dot off"></div>
     </div>
 
-    <div class="search">
-      <input value="" placeholder="buraya bir şey yaz..." />
-    </div>
-
-    <div class="hint">(click)</div>
-
+    <div class="hint">(tıkla)</div>
     <div class="clickLayer" id="go"></div>
   </div>
 
