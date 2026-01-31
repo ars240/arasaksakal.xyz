@@ -1,74 +1,89 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <title>Aras Aksakal</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      background: radial-gradient(circle at top, #111, #000);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      font-family: Arial, sans-serif;
-      overflow: hidden;
-    }
-    .card {
-      background: rgba(20,20,20,0.85);
-      border-radius: 20px;
-      padding: 40px;
-      text-align: center;
-      box-shadow: 0 0 40px rgba(255,255,255,0.15);
-    }
-    .eyes {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      margin-bottom: 20px;
-    }
-    .eye {
-      width: 60px;
-      height: 60px;
-      background: white;
-      border-radius: 50%;
-      position: relative;
-    }
-    .pupil {
-      width: 20px;
-      height: 20px;
-      background: black;
-      border-radius: 50%;
-      position: absolute;
-      top: 20px;
-      left: 20px;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Aras Aksakal</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  height: 100vh;
+  background: radial-gradient(circle at top, #111, #000);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  color: white;
+}
+
+/* KAR */
+.snow {
+  position: fixed;
+  top: -10px;
+  user-select: none;
+  pointer-events: none;
+  animation: fall linear infinite;
+}
+@keyframes fall {
+  to { transform: translateY(110vh); }
+}
+
+/* BLURRY CAM KART */
+.card {
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  background: rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 45px 60px;
+  text-align: center;
+  box-shadow: 0 0 60px rgba(255,255,255,0.15);
+  transition: transform 0.1s linear;
+}
+
+h1 {
+  margin: 0;
+  font-size: 32px;
+  letter-spacing: 1px;
+}
+
+p {
+  margin-top: 10px;
+  opacity: 0.7;
+}
+</style>
 </head>
+
 <body>
 
-<div class="card">
-  <div class="eyes">
-    <div class="eye"><div class="pupil"></div></div>
-    <div class="eye"><div class="pupil"></div></div>
-  </div>
+<div class="card" id="card">
   <h1>Aras Aksakal</h1>
   <p>personal site</p>
 </div>
 
 <script>
+// KAR
+for (let i = 0; i < 90; i++) {
+  const snow = document.createElement("div");
+  snow.className = "snow";
+  snow.innerText = "❄";
+  snow.style.left = Math.random() * 100 + "vw";
+  snow.style.animationDuration = 3 + Math.random() * 6 + "s";
+  snow.style.opacity = Math.random();
+  snow.style.fontSize = 8 + Math.random() * 14 + "px";
+  document.body.appendChild(snow);
+}
+
+// KART MOUSE TAKİBİ
 document.addEventListener("mousemove", e => {
-  document.querySelectorAll(".eye").forEach(eye => {
-    const pupil = eye.querySelector(".pupil");
-    const rect = eye.getBoundingClientRect();
-    const x = e.clientX - (rect.left + rect.width / 2);
-    const y = e.clientY - (rect.top + rect.height / 2);
-    const angle = Math.atan2(y, x);
-    const r = 15;
-    pupil.style.left = 20 + Math.cos(angle) * r + "px";
-    pupil.style.top  = 20 + Math.sin(angle) * r + "px";
-  });
+  const card = document.getElementById("card");
+  const cx = window.innerWidth / 2;
+  const cy = window.innerHeight / 2;
+  const dx = (e.clientX - cx) / 30;
+  const dy = (e.clientY - cy) / 30;
+  card.style.transform = `rotateY(${dx}deg) rotateX(${-dy}deg)`;
 });
 </script>
 
