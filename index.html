@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Aras Aksakal</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Lobster&family=Inter&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lobster&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
 *{box-sizing:border-box}
@@ -13,109 +13,33 @@ html,body{height:100%}
 
 body{
   margin:0;
-  background:radial-gradient(circle at top,#111,#000);
   overflow:hidden;
   display:flex;
   justify-content:center;
   align-items:center;
   font-family:Inter,Arial,sans-serif;
-  color:white;
+  color:#fff;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(160,80,255,.18), transparent 45%),
+    radial-gradient(circle at 80% 70%, rgba(80,200,255,.14), transparent 50%),
+    radial-gradient(circle at top, #111, #000);
 }
 
 /* KAR TOPLARI */
 .snow{
   position:fixed;
-  top:-10px;
-  width:4px;
-  height:4px;
-  background:white;
-  border-radius:50%;
-  opacity:.8;
+  top:-12px;
+  border-radius:999px;
+  background:rgba(255,255,255,.95);
+  pointer-events:none;
   animation:fall linear infinite;
+  box-shadow:0 0 12px rgba(255,255,255,.25);
 }
 @keyframes fall{
-  to{transform:translateY(110vh)}
+  to{ transform:translateY(110vh); }
 }
 
 /* CAM EKRAN */
 .card{
   position:relative;
-  padding:48px 64px;
-  border-radius:22px;
-  backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
-  background:rgba(255,255,255,.08);
-  box-shadow:0 0 60px rgba(255,255,255,.15);
-  text-align:center;
-  cursor:pointer;
-  transform-style:preserve-3d;
-  transition:transform .1s linear;
-}
-
-/* PARLAYAN YAZI */
-h1{
-  margin:0;
-  font-family:'Lobster',cursive;
-  font-size:52px;
-  text-shadow:
-    0 0 10px rgba(255,255,255,.4),
-    0 0 25px rgba(255,255,255,.3),
-    0 0 45px rgba(255,255,255,.2);
-  animation:glow 2s infinite alternate;
-}
-@keyframes glow{
-  from{opacity:.7}
-  to{opacity:1}
-}
-
-p{
-  margin-top:10px;
-  font-size:13px;
-  letter-spacing:2px;
-  opacity:.7;
-  animation:blink 1.5s infinite;
-}
-@keyframes blink{
-  0%,100%{opacity:.4}
-  50%{opacity:1}
-}
-</style>
-</head>
-
-<body>
-
-<div class="card" id="card">
-  <h1>Aras Aksakal</h1>
-  <p>(click)</p>
-</div>
-
-<script>
-// KAR OLUŞTUR
-for(let i=0;i<120;i++){
-  const s=document.createElement("div");
-  s.className="snow";
-  s.style.left=Math.random()*100+"vw";
-  s.style.animationDuration=4+Math.random()*6+"s";
-  s.style.opacity=Math.random();
-  s.style.width=s.style.height=2+Math.random()*4+"px";
-  document.body.appendChild(s);
-}
-
-// MOUSE TAKİP (ekran nereye bakıyorsa)
-document.addEventListener("mousemove",e=>{
-  const card=document.getElementById("card");
-  const cx=window.innerWidth/2;
-  const cy=window.innerHeight/2;
-  const dx=(e.clientX-cx)/25;
-  const dy=(e.clientY-cy)/25;
-  card.style.transform=`rotateY(${dx}deg) rotateX(${-dy}deg)`;
-});
-
-// TIKLAYINCA DİĞER SAYFA
-document.getElementById("card").onclick=()=>{
-  window.location.href="links.html";
-};
-</script>
-
-</body>
-</html>
+  padding:54px 7
