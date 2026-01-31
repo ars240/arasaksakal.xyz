@@ -1,169 +1,136 @@
 <!doctype html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aras Aksakal</title>
-  <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;height:100vh;overflow:hidden;
-      display:grid;place-items:center;
-      font-family:Inter,Arial,sans-serif;color:#fff;
-      background: radial-gradient(circle at top, #111, #000);
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aras Aksakal</title>
 
-    /* snow dots */
-    .snow{
-      position:fixed;top:-12px;border-radius:999px;
-      background:rgba(255,255,255,.95);
-      pointer-events:none;user-select:none;
-      animation: fall linear infinite;
-      box-shadow:0 0 10px rgba(255,255,255,.20);
-      z-index:3;
-    }
-    @keyframes fall{ to{ transform:translateY(110vh); } }
+<link href="https://fonts.googleapis.com/css2?family=Lobster&family=Inter&display=swap" rel="stylesheet">
 
-    /* glass card */
-    .card{
-      position:relative;
-      width:min(520px,92vw);
-      border-radius:24px;
-      padding:34px 30px 26px;
-      background:rgba(255,255,255,.08);
-      border:1px solid rgba(255,255,255,.12);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      box-shadow:0 0 60px rgba(255,255,255,.12);
-      transform-style:preserve-3d;
-      transition:transform .08s linear;
-      z-index:5;
-      --mx:50%; --my:50%;
-      cursor:pointer;
-    }
-    .card::before{
-      content:"";
-      position:absolute; inset:0;
-      border-radius:inherit;
-      pointer-events:none;
-      background: radial-gradient(circle at var(--mx) var(--my),
-        rgba(255,255,255,.18), rgba(255,255,255,.06) 25%, transparent 60%);
-      opacity:.9;
-    }
+<style>
+*{box-sizing:border-box}
+html,body{height:100%}
 
-    .top{
-      display:flex;align-items:center;justify-content:center;
-      gap:16px;padding-top:6px;
-      transform:translateZ(14px);
-    }
+body{
+  margin:0;height:100vh;overflow:hidden;
+  display:grid;place-items:center;
+  font-family:Inter,Arial,sans-serif;
+  color:#fff;
+  background: radial-gradient(circle at top, #111, #000);
+}
 
-    .avatar{
-      width:86px;height:86px;border-radius:999px;
-      border:2px solid rgba(255,255,255,.18);
-      background:
-        radial-gradient(circle at 30% 25%, rgba(255,255,255,.20), transparent 45%),
-        rgba(0,0,0,.25);
-      display:grid;place-items:center;
-      font-weight:700;letter-spacing:.5px;
-      box-shadow:0 0 24px rgba(255,255,255,.10);
-      overflow:hidden;
-    }
-    .avatar span{opacity:.9}
+/* kar */
+.snow{
+  position:fixed;top:-12px;border-radius:50%;
+  background:white;opacity:.8;
+  animation:fall linear infinite;
+  pointer-events:none;
+}
+@keyframes fall{to{transform:translateY(110vh)}}
 
-    .name{
-      margin:0;
-      font-family:Lobster, cursive;
-      font-size:40px;line-height:1;
-      text-shadow:0 0 18px rgba(255,255,255,.25);
-      animation: glow 2.2s ease-in-out infinite;
-    }
-    @keyframes glow{0%,100%{opacity:.78}50%{opacity:1}}
+/* kart */
+.card{
+  position:relative;
+  width:min(520px,92vw);
+  padding:36px 32px 28px;
+  border-radius:24px;
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 0 60px rgba(255,255,255,.15);
+  text-align:center;
+  cursor:pointer;
+  transform-style:preserve-3d;
+  transition:transform .1s linear;
+}
 
-    .statusRow{
-      margin-top:12px;
-      display:flex;justify-content:center;gap:10px;
-      transform:translateZ(12px);
-      opacity:.85;
-    }
-    .dot{
-      width:11px;height:11px;border-radius:999px;
-      border:1px solid rgba(255,255,255,.18);
-      background:rgba(255,255,255,.18);
-      box-shadow:0 0 16px rgba(255,255,255,.08);
-    }
-    .dot.on{ background:rgba(140,255,180,.35); }
-    .dot.mid{ background:rgba(180,170,255,.30); }
-    .dot.off{ background:rgba(255,140,140,.25); }
+/* yazı */
+h1{
+  margin:0;
+  font-family:Lobster,cursive;
+  font-size:44px;
+  text-shadow:0 0 18px rgba(255,255,255,.35);
+}
+.hint{
+  margin-top:12px;
+  font-size:12px;
+  letter-spacing:2px;
+  opacity:.65;
+  text-transform:lowercase;
+}
 
-    .hint{
-      margin:18px 0 0;
-      text-align:center;
-      font-size:12px;
-      letter-spacing:2px;
-      opacity:.65;
-      text-transform:lowercase; /* ✅ hepsi küçük */
-      animation: blink 1.5s infinite;
-      transform:translateZ(10px);
-    }
-    @keyframes blink{0%,100%{opacity:.35}50%{opacity:.9}}
-
-    .clickLayer{ position:absolute; inset:0; border-radius:inherit; z-index:10; }
-  </style>
+/* particle */
+.particle{
+  position:fixed;
+  width:6px;height:6px;
+  border-radius:50%;
+  background:white;
+  pointer-events:none;
+  animation:pop .8s ease-out forwards;
+}
+@keyframes pop{
+  to{
+    transform:translate(var(--x),var(--y)) scale(0);
+    opacity:0;
+  }
+}
+</style>
 </head>
+
 <body>
 
-  <div class="card" id="card" title="tıkla">
-    <div class="top">
-      <div class="avatar"><span>AA</span></div>
-      <div><h1 class="name">Aras Aksakal</h1></div>
-    </div>
-
-    <div class="statusRow">
-      <div class="dot on"></div>
-      <div class="dot mid"></div>
-      <div class="dot off"></div>
-    </div>
-
-    <div class="hint">(tıkla)</div>
-    <div class="clickLayer" id="go"></div>
-  </div>
+<div class="card" id="card">
+  <h1>Aras Aksakal</h1>
+  <div class="hint">(tıkla)</div>
+</div>
 
 <script>
-  // SNOW
-  for(let i=0;i<120;i++){
-    const s=document.createElement("div");
-    s.className="snow";
-    s.style.left=(Math.random()*100)+"vw";
-    const size = 4 + Math.random()*4; // 4-8px
-    s.style.width=size+"px";
-    s.style.height=size+"px";
-    const dur = 4 + Math.random()*6;
-    s.style.animationDuration = dur+"s";
-    s.style.animationDelay = (-Math.random()*dur)+"s";
-    s.style.opacity = (0.25 + Math.random()*0.75).toFixed(2);
-    document.body.appendChild(s);
+// kar
+for(let i=0;i<90;i++){
+  const s=document.createElement("div");
+  s.className="snow";
+  s.style.left=Math.random()*100+"vw";
+  const size=4+Math.random()*4;
+  s.style.width=size+"px";
+  s.style.height=size+"px";
+  s.style.animationDuration=4+Math.random()*6+"s";
+  s.style.opacity=Math.random();
+  document.body.appendChild(s);
+}
+
+// mouse tilt
+document.addEventListener("mousemove",e=>{
+  const card=document.getElementById("card");
+  const cx=innerWidth/2, cy=innerHeight/2;
+  const dx=(e.clientX-cx)/30;
+  const dy=(e.clientY-cy)/30;
+  card.style.transform=`rotateY(${dx}deg) rotateX(${-dy}deg)`;
+});
+
+// PARTICLE EFFECT
+function burst(x,y){
+  for(let i=0;i<24;i++){
+    const p=document.createElement("div");
+    p.className="particle";
+    p.style.left=x+"px";
+    p.style.top=y+"px";
+    const angle=Math.random()*Math.PI*2;
+    const dist=40+Math.random()*40;
+    p.style.setProperty("--x",Math.cos(angle)*dist+"px");
+    p.style.setProperty("--y",Math.sin(angle)*dist+"px");
+    document.body.appendChild(p);
+    setTimeout(()=>p.remove(),800);
   }
+}
 
-  // TILT + LIGHT FOLLOW
-  const card = document.getElementById("card");
-  document.addEventListener("mousemove",(e)=>{
-    const cx=window.innerWidth/2, cy=window.innerHeight/2;
-    const dx=(e.clientX-cx)/30, dy=(e.clientY-cy)/30;
-    card.style.transform = `rotateY(${dx}deg) rotateX(${-dy}deg)`;
-
-    const r=card.getBoundingClientRect();
-    const mx=((e.clientX-r.left)/r.width)*100;
-    const my=((e.clientY-r.top)/r.height)*100;
-    card.style.setProperty("--mx", mx+"%");
-    card.style.setProperty("--my", my+"%");
-  });
-
-  // NAV (cache kırarak)
-  document.getElementById("go").addEventListener("click", ()=>{
-    window.location.href = "links.html?v=" + Date.now();
-  });
+// tıklama
+document.getElementById("card").addEventListener("click",e=>{
+  burst(e.clientX,e.clientY);
+  setTimeout(()=>{
+    window.location.href="links.html?v="+Date.now();
+  },300);
+});
 </script>
+
 </body>
 </html>
