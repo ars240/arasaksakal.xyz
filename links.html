@@ -9,30 +9,22 @@
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
-      margin:0;
-      height:100vh;
-      overflow:hidden;
-      display:grid;
-      place-items:center;
-      font-family:Inter,Arial,sans-serif;
-      color:#fff;
+      margin:0;height:100vh;overflow:hidden;
+      display:grid;place-items:center;
+      font-family:Inter,Arial,sans-serif;color:#fff;
       background: radial-gradient(circle at top, #111, #000);
     }
 
     .snow{
-      position:fixed;
-      top:-12px;
-      border-radius:999px;
+      position:fixed;top:-12px;border-radius:999px;
       background:rgba(255,255,255,.95);
-      pointer-events:none;
-      user-select:none;
+      pointer-events:none;user-select:none;
       animation:fall linear infinite;
       box-shadow:0 0 10px rgba(255,255,255,.20);
       z-index:3;
     }
     @keyframes fall{ to{ transform:translateY(110vh); } }
 
-    /* Menü biraz büyük */
     .card{
       position:relative;
       width:min(540px,92vw);
@@ -59,36 +51,28 @@
     }
 
     h1{
-      margin:0;
-      text-align:center;
+      margin:0;text-align:center;
       font-family:Lobster,cursive;
       font-size:42px;
       transform:translateZ(14px);
       text-shadow:0 0 18px rgba(255,255,255,.22);
     }
     .sub{
-      margin:10px 0 0;
-      text-align:center;
-      opacity:.75;
-      transform:translateZ(10px);
+      margin:10px 0 0;text-align:center;
+      opacity:.75;transform:translateZ(10px);
       font-size:15px;
     }
 
     .links{
       margin-top:20px;
-      display:grid;
-      gap:14px;
+      display:grid;gap:14px;
       transform:translateZ(12px);
     }
 
     .btn{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      text-decoration:none;
-      color:#fff;
-      padding:14px 16px;
-      border-radius:16px;
+      display:flex;align-items:center;gap:12px;
+      text-decoration:none;color:#fff;
+      padding:14px 16px;border-radius:16px;
       background:rgba(0,0,0,.18);
       border:1px solid rgba(255,255,255,.12);
       transition:transform .15s ease, background .15s ease, border-color .15s ease;
@@ -99,29 +83,11 @@
       border-color:rgba(255,255,255,.20);
     }
 
-    .ico{
-      width:22px;height:22px;
-      display:inline-block;
-      flex:0 0 auto;
-      opacity:.95;
-    }
-    .label{
-      font-weight:600;
-      letter-spacing:.2px;
-    }
-    .user{
-      margin-left:auto;
-      opacity:.7;
-      font-size:13px;
-    }
+    .ico{ width:22px;height:22px;display:inline-block;opacity:.95; }
+    .label{ font-weight:600; letter-spacing:.2px; }
+    .user{ margin-left:auto; opacity:.7; font-size:13px; }
 
-    .back{
-      margin-top:16px;
-      display:inline-flex;
-      justify-content:center;
-      width:100%;
-      opacity:.8;
-    }
+    .back{ margin-top:16px; display:inline-flex; justify-content:center; width:100%; opacity:.85; }
   </style>
 </head>
 <body>
@@ -133,7 +99,6 @@
     <div class="links">
       <!-- Instagram -->
       <a class="btn" href="https://instagram.com/arasaksakal1" target="_blank" rel="noopener">
-        <!-- Instagram SVG -->
         <svg class="ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path d="M7.5 2.75h9A4.75 4.75 0 0 1 21.25 7.5v9A4.75 4.75 0 0 1 16.5 21.25h-9A4.75 4.75 0 0 1 2.75 16.5v-9A4.75 4.75 0 0 1 7.5 2.75Z" stroke="currentColor" stroke-width="1.6"/>
           <path d="M12 16.2a4.2 4.2 0 1 0 0-8.4 4.2 4.2 0 0 0 0 8.4Z" stroke="currentColor" stroke-width="1.6"/>
@@ -143,13 +108,13 @@
         <span class="user">@arasaksakal1</span>
       </a>
 
-      <!-- Snapchat -->
+      <!-- Snapchat (DÜZGÜN ghost) -->
       <a class="btn" href="https://www.snapchat.com/add/arasaksakal1" target="_blank" rel="noopener">
-        <!-- Snapchat ghost SVG (basit) -->
         <svg class="ico" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M12 3.2c-2.7 0-4.8 2.1-4.8 4.8v2.9c0 .7-.6 1.2-1.3 1.4l-1.1.3c-.6.2-.9.8-.6 1.4.5 1 1.6 1.7 2.8 1.9.5.1.9.5 1 .9.3 1.5 1.7 2.6 3.2 2.6h1.6c1.5 0 2.9-1.1 3.2-2.6.1-.4.5-.8 1-.9 1.2-.2 2.3-.9 2.8-1.9.3-.6 0-1.2-.6-1.4l-1.1-.3c-.7-.2-1.3-.7-1.3-1.4V8c0-2.7-2.1-4.8-4.8-4.8Z"
-            stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-          <path d="M9.2 19.1c.8.6 1.7 1 2.8 1s2-.4 2.8-1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M12 2.9c-2.95 0-5.35 2.4-5.35 5.35v2.85c0 .55-.38 1.05-.92 1.18l-1.02.25c-.9.22-1.28 1.25-.73 2.0.75 1.02 2.02 1.83 3.48 2.06.52.08.94.47 1.05.98.34 1.63 1.83 2.84 3.5 2.84h.98c1.67 0 3.16-1.21 3.5-2.84.11-.51.53-.9 1.05-.98 1.46-.23 2.73-1.04 3.48-2.06.55-.75.17-1.78-.73-2.0l-1.02-.25c-.54-.13-.92-.63-.92-1.18V8.25c0-2.95-2.4-5.35-5.35-5.35Z"
+                stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+          <path d="M9.2 19.2c.8.7 1.75 1.1 2.8 1.1s2-.4 2.8-1.1"
+                stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
         </svg>
         <span class="label">Snapchat</span>
         <span class="user">@arasaksakal1</span>
@@ -171,7 +136,7 @@
     const dur = 4 + Math.random()*6;
     s.style.animationDuration = dur+"s";
     s.style.animationDelay = (-Math.random()*dur)+"s";
-    s.style.opacity = (0.25 + Math.random()*0.75).toFixed(2);
+    s.style.opacity = (0.25 + Math.random() * 0.75).toFixed(2);
     document.body.appendChild(s);
   }
 
