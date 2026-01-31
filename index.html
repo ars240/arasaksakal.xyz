@@ -1,30 +1,78 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
 <meta charset="UTF-8">
-<title>TEST</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aras Aksakal</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+
 <style>
+*{box-sizing:border-box}
+html,body{height:100%}
+
 body{
   margin:0;
   height:100vh;
+  background: radial-gradient(circle at top, #111, #000);
+  overflow:hidden;
   display:flex;
   justify-content:center;
   align-items:center;
-  background:black;
-}
-.test{
-  width:300px;
-  height:200px;
-  border:5px solid red;
+  font-family: Arial, sans-serif;
   color:white;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:24px;
 }
-</style>
-</head>
-<body>
-  <div class="test">BEN BURADAYIM</div>
-</body>
-</html>
+
+/* KAR TOPLARI */
+.snow{
+  position:fixed;
+  top:-12px;
+  border-radius:999px;
+  background: rgba(255,255,255,0.95);
+  pointer-events:none;
+  user-select:none;
+  animation: fall linear infinite;
+  box-shadow: 0 0 10px rgba(255,255,255,0.20);
+}
+@keyframes fall{
+  to { transform: translateY(110vh); }
+}
+
+/* BLUR CAM KART */
+.card{
+  position:relative;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 20px;
+  padding: 45px 60px;
+  text-align:center;
+  box-shadow: 0 0 60px rgba(255,255,255,0.15);
+  transition: transform 0.1s linear;
+  transform-style: preserve-3d;
+  cursor:pointer;
+}
+
+/* başlık */
+h1{
+  margin:0;
+  font-family: 'Lobster', cursive;
+  font-size: 52px;
+  letter-spacing: 0.5px;
+  text-shadow:
+    0 0 10px rgba(255,255,255,0.25),
+    0 0 24px rgba(255,255,255,0.18),
+    0 0 50px rgba(255,255,255,0.10);
+  animation: glow 2.2s ease-in-out infinite;
+}
+@keyframes glow{
+  0%,100%{opacity:0.75}
+  50%{opacity:1}
+}
+
+p{
+  margin-top:10px;
+  opacity:0.7;
+  letter-spacing:2px;
+  text-t
