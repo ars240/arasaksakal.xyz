@@ -12,15 +12,21 @@
 html,body{height:100%}
 
 body{
-  margin:0;height:100vh;overflow:hidden;
-  display:grid;place-items:center;
-  font-family:Inter,Arial,sans-serif;color:#fff;
+  margin:0;
+  height:100vh;
+  overflow:hidden;
+  display:grid;
+  place-items:center;
+  font-family:Inter,Arial,sans-serif;
+  color:#fff;
   background: radial-gradient(circle at top, #111, #000);
 }
 
 /* kar */
 .snow{
-  position:fixed;top:-12px;border-radius:50%;
+  position:fixed;
+  top:-12px;
+  border-radius:50%;
   background:rgba(255,255,255,.95);
   pointer-events:none;
   animation:fall linear infinite;
@@ -33,7 +39,7 @@ body{
 .card{
   position:relative;
   width:min(540px,92vw);
-  padding:34px 30px 26px;
+  padding:36px 32px 28px;
   border-radius:24px;
   background:rgba(255,255,255,.08);
   backdrop-filter:blur(14px);
@@ -42,11 +48,13 @@ body{
   transform-style:preserve-3d;
   transition:transform .08s linear;
   z-index:5;
-  --mx:50%;--my:50%;
+  --mx:50%;
+  --my:50%;
 }
 .card::before{
   content:"";
-  position:absolute;inset:0;
+  position:absolute;
+  inset:0;
   border-radius:inherit;
   pointer-events:none;
   background:radial-gradient(circle at var(--mx) var(--my),
@@ -56,12 +64,19 @@ body{
 }
 
 h1{
-  margin:0;text-align:center;
+  margin:0;
+  text-align:center;
   font-family:Lobster,cursive;
   font-size:42px;
+  text-shadow:0 0 18px rgba(255,255,255,.25);
 }
-.sub{text-align:center;opacity:.7;margin-top:8px}
+.sub{
+  margin-top:8px;
+  text-align:center;
+  opacity:.7;
+}
 
+/* butonlar */
 .links{
   margin-top:22px;
   display:grid;
@@ -69,29 +84,46 @@ h1{
 }
 
 .btn{
-  display:flex;align-items:center;gap:12px;
-  text-decoration:none;color:#fff;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-decoration:none;
+  color:#fff;
   padding:14px 16px;
   border-radius:16px;
   background:rgba(0,0,0,.18);
   border:1px solid rgba(255,255,255,.12);
   cursor:pointer;
+  transition:transform .15s ease, background .15s ease;
 }
-.btn:hover{background:rgba(255,255,255,.08)}
+.btn:hover{
+  transform:scale(1.02);
+  background:rgba(255,255,255,.08);
+}
 
-.ico{width:22px;height:22px}
-.user{margin-left:auto;opacity:.7;font-size:13px}
+.ico{
+  width:22px;
+  height:22px;
+  flex:0 0 auto;
+}
+.label{font-weight:600}
+.user{
+  margin-left:auto;
+  opacity:.7;
+  font-size:13px;
+}
 
 .back{
   margin-top:16px;
-  text-align:center;
-  opacity:.8;
+  display:flex;
+  justify-content:center;
 }
 
-/* TOPÇUK */
+/* topçuk */
 .particle{
   position:fixed;
-  width:6px;height:6px;
+  width:6px;
+  height:6px;
   border-radius:50%;
   background:white;
   pointer-events:none;
@@ -115,19 +147,33 @@ h1{
   <div class="sub">Sosyal hesaplarım</div>
 
   <div class="links">
+
     <!-- Instagram -->
-    <a class="btn linkBtn" href="https://instagram.com/arasaksakal1" target="_blank">
-      <span class="ico">📸</span>
-      Instagram
+    <a class="btn linkBtn" href="https://instagram.com/arasaksakal1" target="_blank" rel="noopener">
+      <svg class="ico" viewBox="0 0 24 24" fill="none">
+        <path d="M7.5 2.75h9A4.75 4.75 0 0 1 21.25 7.5v9A4.75 4.75 0 0 1 16.5 21.25h-9A4.75 4.75 0 0 1 2.75 16.5v-9A4.75 4.75 0 0 1 7.5 2.75Z"
+              stroke="currentColor" stroke-width="1.6"/>
+        <path d="M12 16.2a4.2 4.2 0 1 0 0-8.4 4.2 4.2 0 0 0 0 8.4Z"
+              stroke="currentColor" stroke-width="1.6"/>
+        <path d="M17.35 6.85h.01"
+              stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>
+      </svg>
+      <span class="label">Instagram</span>
       <span class="user">@arasaksakal1</span>
     </a>
 
     <!-- Snapchat -->
-    <a class="btn linkBtn" href="https://www.snapchat.com/add/arasaksakal1" target="_blank">
-      <span class="ico">👻</span>
-      Snapchat
+    <a class="btn linkBtn" href="https://www.snapchat.com/add/arasaksakal1" target="_blank" rel="noopener">
+      <svg class="ico" viewBox="0 0 24 24" fill="none">
+        <path d="M12 2.9c-2.95 0-5.35 2.4-5.35 5.35v2.85c0 .55-.38 1.05-.92 1.18l-1.02.25c-.9.22-1.28 1.25-.73 2.0.75 1.02 2.02 1.83 3.48 2.06.52.08.94.47 1.05.98.34 1.63 1.83 2.84 3.5 2.84h.98c1.67 0 3.16-1.21 3.5-2.84.11-.51.53-.9 1.05-.98 1.46-.23 2.73-1.04 3.48-2.06.55-.75.17-1.78-.73-2.0l-1.02-.25c-.54-.13-.92-.63-.92-1.18V8.25c0-2.95-2.4-5.35-5.35-5.35Z"
+              stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+        <path d="M9.2 19.2c.8.7 1.75 1.1 2.8 1.1s2-.4 2.8-1.1"
+              stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+      <span class="label">Snapchat</span>
       <span class="user">@arasaksakal1</span>
     </a>
+
   </div>
 
   <div class="back">
@@ -136,7 +182,7 @@ h1{
 </div>
 
 <script>
-// kar (sürekli aksın)
+// kar (kesintisiz)
 for(let i=0;i<120;i++){
   const s=document.createElement("div");
   s.className="snow";
@@ -160,7 +206,7 @@ document.addEventListener("mousemove",e=>{
   card.style.transform=`rotateY(${dx}deg) rotateX(${-dy}deg)`;
 });
 
-// TOPÇUK FONKSİYONU
+// topçuk efekti
 function burst(x,y){
   for(let i=0;i<24;i++){
     const p=document.createElement("div");
@@ -176,7 +222,6 @@ function burst(x,y){
   }
 }
 
-// BUTONLARDA EFEKT + GECİKMELİ AÇILIŞ
 document.querySelectorAll(".linkBtn").forEach(btn=>{
   btn.addEventListener("click",e=>{
     e.preventDefault();
