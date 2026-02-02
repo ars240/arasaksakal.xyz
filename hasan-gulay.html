@@ -22,23 +22,41 @@ body{
   color:#111;
 }
 
-/* yazı */
+/* 🌸 PARLAYAN YAZI */
 .text{
   text-align:center;
   font-size:64px;
   line-height:1.15;
   z-index:5;
-  text-shadow:0 10px 30px rgba(0,0,0,.10);
+  color:#e0629a; /* koyu pembe */
+  text-shadow:
+    0 0 8px rgba(224,98,154,.6),
+    0 0 16px rgba(224,98,154,.45),
+    0 0 32px rgba(224,98,154,.35);
+  animation: glow 2.5s ease-in-out infinite;
 }
 
-/* kitty yağışı (resim) */
+@keyframes glow{
+  0%,100%{
+    text-shadow:
+      0 0 6px rgba(224,98,154,.45),
+      0 0 14px rgba(224,98,154,.35),
+      0 0 26px rgba(224,98,154,.25);
+  }
+  50%{
+    text-shadow:
+      0 0 10px rgba(224,98,154,.8),
+      0 0 22px rgba(224,98,154,.6),
+      0 0 40px rgba(224,98,154,.45);
+  }
+}
+
+/* 🎀 HELLO KITTY YAĞIŞI */
 .kitty{
   position:fixed;
   top:-60px;
   width:22px;
-  height:auto;
   pointer-events:none;
-  user-select:none;
   animation: fall linear infinite;
   z-index:2;
   opacity:.95;
@@ -48,7 +66,7 @@ body{
   to{ transform: translateY(110vh); }
 }
 
-/* geri butonu */
+/* ⬅️ GERİ */
 .back{
   position:fixed;
   left:14px;
@@ -77,7 +95,7 @@ body{
 </div>
 
 <script>
-// ✅ hello-kitty.png yağışı (kesintisiz için negatif delay)
+// 🐱 HELLO KITTY YAĞIŞI (KESİNTİSİZ)
 for(let i=0;i<80;i++){
   const k=document.createElement("img");
   k.className="kitty";
@@ -86,7 +104,7 @@ for(let i=0;i<80;i++){
 
   k.style.left=(Math.random()*100)+"vw";
 
-  const size=16+Math.random()*14; // 16–30px
+  const size=16+Math.random()*14;
   k.style.width=size+"px";
 
   const dur=4+Math.random()*6;
