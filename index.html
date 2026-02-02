@@ -66,23 +66,25 @@ h1{
   text-transform:lowercase;
 }
 
-/* 🥷 BATU GİZLİ (EMOJI) */
-.batu-btn{
+/* 🎀 + 🥷 YAN YANA */
+.secret-row{
   position:fixed;
-  left:14px;
+  right:14px;
   bottom:14px;
+  display:flex;
+  gap:10px;
   font-size:22px;
   cursor:pointer;
-  opacity:.6;
   z-index:20;
+  opacity:.7;
 }
-.batu-btn:hover{opacity:1}
+.secret-row span:hover{opacity:1}
 
-/* 📱 mobilde orta alt */
+/* mobilde alt orta */
 @media(max-width:768px){
-  .batu-btn{
-    left:50%;
-    transform:translateX(-50%);
+  .secret-row{
+    right:50%;
+    transform:translateX(50%);
     bottom:12px;
   }
 }
@@ -97,8 +99,11 @@ h1{
   <div class="hint">(tıkla)</div>
 </div>
 
-<!-- 🥷 BATU BERA GİZLİ -->
-<div class="batu-btn" onclick="location.href='batu-bera.html'">🥷</div>
+<!-- 🎀 HASAN 🤍 GÜLAY + 🥷 BATU BERA -->
+<div class="secret-row">
+  <span onclick="location.href='hasan-gulay.html'">🎀</span>
+  <span onclick="location.href='batu-bera.html'">🥷</span>
+</div>
 
 <script>
 // ❄️ KAR – KESİNTİSİZ
@@ -120,8 +125,7 @@ for(let i=0;i<120;i++){
 }
 
 // 🖱️ ANA KART TIKLAMA
-const card=document.getElementById("card");
-card.addEventListener("click", ()=>{
+document.getElementById("card").addEventListener("click", ()=>{
   window.location.href="links.html";
 });
 
@@ -130,7 +134,8 @@ document.addEventListener("mousemove", e=>{
   const cx=innerWidth/2, cy=innerHeight/2;
   const dx=(e.clientX-cx)/30;
   const dy=(e.clientY-cy)/30;
-  card.style.transform=`rotateY(${dx}deg) rotateX(${-dy}deg)`;
+  document.getElementById("card").style.transform =
+    `rotateY(${dx}deg) rotateX(${-dy}deg)`;
 });
 </script>
 
