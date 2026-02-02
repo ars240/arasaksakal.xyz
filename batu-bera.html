@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Batu</title>
+<title>Batu Bera</title>
 
 <style>
 html,body{
@@ -15,27 +15,14 @@ html,body{
   background:#000;
 }
 
-/* FULL RESİM */
+/* FULL EKRAN RESİM */
 .bg{
   position:fixed;
   inset:0;
-  background:url("batu-bg.jpg") center center / cover no-repeat;
-}
-
-/* GERİ */
-.back{
-  position:fixed;
-  left:12px;
-  top:12px;
-  padding:8px 12px;
-  border-radius:12px;
-  background:rgba(0,0,0,.35);
-  backdrop-filter: blur(10px);
-  color:#fff;
-  font-family:system-ui,Arial;
-  font-size:14px;
-  text-decoration:none;
-  z-index:10;
+  background-image:url("batu-bg.jpg");
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
 }
 
 /* MÜZİK BUTONU */
@@ -46,16 +33,28 @@ html,body{
   width:40px;
   height:40px;
   border-radius:999px;
-  background:rgba(0,0,0,.35);
-  backdrop-filter: blur(10px);
+  background:rgba(0,0,0,.4);
   border:none;
   color:#fff;
   font-size:16px;
   cursor:pointer;
   z-index:10;
-  opacity:.8;
 }
-#musicBtn:active{transform:scale(.95)}
+
+/* GERİ */
+.back{
+  position:fixed;
+  left:12px;
+  top:12px;
+  padding:8px 12px;
+  border-radius:12px;
+  background:rgba(0,0,0,.4);
+  color:#fff;
+  text-decoration:none;
+  font-family:system-ui,Arial;
+  font-size:14px;
+  z-index:10;
+}
 </style>
 </head>
 
@@ -65,7 +64,6 @@ html,body{
 
 <a class="back" href="index.html">← geri</a>
 
-<!-- MÜZİK -->
 <audio id="audio" src="batu-bera.mp3" loop preload="auto"></audio>
 <button id="musicBtn">⏸</button>
 
@@ -92,13 +90,10 @@ function stop(){
   btn.textContent = "▶";
 }
 
-// otomatik başlatmayı dene
 window.addEventListener("load", start);
-// mobilde ilk dokunuşta başlat
-document.addEventListener("touchstart", start, { once:true });
 document.addEventListener("click", start, { once:true });
+document.addEventListener("touchstart", start, { once:true });
 
-// buton
 btn.addEventListener("click",(e)=>{
   e.stopPropagation();
   playing ? stop() : start();
