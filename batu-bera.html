@@ -15,17 +15,31 @@ html,body{
   background:#000;
 }
 
-/* FULL EKRAN RESİM */
+/* full ekran resim (JPEG) */
 .bg{
   position:fixed;
   inset:0;
-  background-image:url("batu-bg.jpg");
-  background-size:cover;
-  background-position:center;
-  background-repeat:no-repeat;
+  background:url("batu-bg.jpeg") center/cover no-repeat;
 }
 
-/* MÜZİK BUTONU */
+/* geri */
+.back{
+  position:fixed;
+  left:12px;
+  top:12px;
+  padding:8px 12px;
+  border-radius:12px;
+  background:rgba(0,0,0,.40);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color:#fff;
+  text-decoration:none;
+  font-family:system-ui,Arial;
+  font-size:14px;
+  z-index:10;
+}
+
+/* küçük müzik butonu */
 #musicBtn{
   position:fixed;
   right:12px;
@@ -33,27 +47,25 @@ html,body{
   width:40px;
   height:40px;
   border-radius:999px;
-  background:rgba(0,0,0,.4);
+  background:rgba(0,0,0,.40);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border:none;
   color:#fff;
   font-size:16px;
   cursor:pointer;
   z-index:10;
+  opacity:.85;
 }
+#musicBtn:active{transform:scale(.95)}
 
-/* GERİ */
-.back{
-  position:fixed;
-  left:12px;
-  top:12px;
-  padding:8px 12px;
-  border-radius:12px;
-  background:rgba(0,0,0,.4);
-  color:#fff;
-  text-decoration:none;
-  font-family:system-ui,Arial;
-  font-size:14px;
-  z-index:10;
+/* mobilde alt orta */
+@media(max-width:768px){
+  #musicBtn{
+    right:50%;
+    transform:translateX(50%);
+    bottom:12px;
+  }
 }
 </style>
 </head>
@@ -80,6 +92,7 @@ async function start(){
     playing = true;
     btn.textContent = "⏸";
   }catch(e){
+    // mobil autoplay engeli
     btn.textContent = "▶";
   }
 }
@@ -90,11 +103,13 @@ function stop(){
   btn.textContent = "▶";
 }
 
+// yüklenince dene (PC’de başlar)
 window.addEventListener("load", start);
-document.addEventListener("click", start, { once:true });
+// mobilde ilk dokunuşta başlat
 document.addEventListener("touchstart", start, { once:true });
+document.addEventListener("click", start, { once:true });
 
-btn.addEventListener("click",(e)=>{
+btn.addEventListener("click", (e)=>{
   e.stopPropagation();
   playing ? stop() : start();
 });
