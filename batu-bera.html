@@ -1,229 +1,107 @@
 <!doctype html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Batu 🥷 Bera</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Lobster&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Batu</title>
 
 <style>
-*{box-sizing:border-box}
-html,body{height:100%}
-
-body{
+html,body{
   margin:0;
-  height:100vh;
+  padding:0;
+  width:100%;
+  height:100%;
   overflow:hidden;
-  font-family:Inter,Arial,sans-serif;
-  color:#fff;
+  background:#000;
 }
 
-/* 🔥 FULL ARKA PLAN */
+/* FULL RESİM */
 .bg{
   position:fixed;
   inset:0;
-  background:url("batu-bg.jpg") center/cover no-repeat;
-  filter: saturate(1.05) contrast(1.05);
-  transform: scale(1.03);
-  z-index:0;
+  background:url("batu-bg.jpg") center center / cover no-repeat;
 }
 
-/* karartma */
-.overlay{
-  position:fixed;
-  inset:0;
-  background: radial-gradient(circle at top, rgba(0,0,0,.35), rgba(0,0,0,.75));
-  z-index:1;
-}
-
-/* CAM KART */
-.card{
-  position:relative;
-  z-index:5;
-  width:min(560px,92vw);
-  margin:0 auto;
-  top:50%;
-  transform:translateY(-50%);
-  padding:30px 26px 24px;
-  border-radius:26px;
-  background:rgba(255,255,255,.08);
-  backdrop-filter:blur(14px);
-  border:1px solid rgba(255,255,255,.12);
-  box-shadow:0 0 60px rgba(0,0,0,.35);
-  text-align:center;
-}
-
-/* BAŞLIK */
-h1{
-  margin:0;
-  font-family:Lobster,cursive;
-  font-size:56px;
-  letter-spacing:.5px;
-  text-shadow:0 0 26px rgba(255,255,255,.18);
-}
-
-/* logo alanı */
-.logo{
-  margin-bottom:16px;
-}
-.logo img{
-  width:68px;
-  height:68px;
-  object-fit:contain;
-  filter: drop-shadow(0 10px 20px rgba(0,0,0,.45));
-}
-
-.sub{
-  margin-top:10px;
-  opacity:.75;
-}
-
-/* 🥷 GİZLİ İŞARET */
-.secretMark{
-  position:fixed;
-  right:12px;
-  bottom:12px;
-  z-index:10;
-  display:flex;
-  align-items:center;
-  gap:8px;
-  padding:6px 10px;
-  border-radius:999px;
-  background:rgba(255,255,255,.10);
-  border:1px solid rgba(255,255,255,.12);
-  backdrop-filter: blur(10px);
-  opacity:.55;
-}
-.secretMark img{
-  width:20px;
-  height:20px;
-  object-fit:contain;
-}
-.secretMark span{
-  font-size:16px;
-}
-
-/* mobilde orta alt */
-@media(max-width:768px){
-  .secretMark{
-    right:50%;
-    transform:translateX(50%);
-    bottom:12px;
-  }
-}
-
-/* 🎵 MÜZİK BUTONU */
-#musicBtn{
-  position:fixed;
-  left:12px;
-  bottom:12px;
-  width:36px;
-  height:36px;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,.18);
-  background:rgba(255,255,255,.10);
-  backdrop-filter: blur(10px);
-  cursor:pointer;
-  z-index:10;
-  display:grid;
-  place-items:center;
-  color:#fff;
-  font-size:14px;
-  opacity:.75;
-}
-#musicBtn:active{transform:scale(.96)}
-@media(max-width:768px){
-  #musicBtn{
-    left:50%;
-    transform:translateX(-50%);
-    bottom:58px;
-  }
-}
-
-/* geri */
+/* GERİ */
 .back{
   position:fixed;
   left:12px;
   top:12px;
-  padding:8px 10px;
+  padding:8px 12px;
   border-radius:12px;
-  background:rgba(255,255,255,.10);
-  border:1px solid rgba(255,255,255,.14);
+  background:rgba(0,0,0,.35);
+  backdrop-filter: blur(10px);
   color:#fff;
+  font-family:system-ui,Arial;
+  font-size:14px;
   text-decoration:none;
   z-index:10;
-  opacity:.85;
 }
+
+/* MÜZİK BUTONU */
+#musicBtn{
+  position:fixed;
+  right:12px;
+  bottom:12px;
+  width:40px;
+  height:40px;
+  border-radius:999px;
+  background:rgba(0,0,0,.35);
+  backdrop-filter: blur(10px);
+  border:none;
+  color:#fff;
+  font-size:16px;
+  cursor:pointer;
+  z-index:10;
+  opacity:.8;
+}
+#musicBtn:active{transform:scale(.95)}
 </style>
 </head>
 
 <body>
 
 <div class="bg"></div>
-<div class="overlay"></div>
 
 <a class="back" href="index.html">← geri</a>
 
-<div class="card">
-  <div class="logo">
-    <img src="batu.png" alt="Batu">
-  </div>
-  <h1>Batu 🥷 Bera</h1>
-  <div class="sub">gizli sayfa</div>
-</div>
-
-<!-- 🥷 LOGO + EMOJI -->
-<div class="secretMark" title="gizli">
-  <img src="batu.png" alt="batu logo">
-  <span>🥷</span>
-</div>
-
-<!-- 🎵 MÜZİK -->
-<audio id="loveAudio" src="batu-bera.mp3" loop preload="auto"></audio>
-<button id="musicBtn" title="müzik"><span id="musicIcon">⏸</span></button>
+<!-- MÜZİK -->
+<audio id="audio" src="batu-bera.mp3" loop preload="auto"></audio>
+<button id="musicBtn">⏸</button>
 
 <script>
-const audio = document.getElementById("loveAudio");
-const btn   = document.getElementById("musicBtn");
-const icon  = document.getElementById("musicIcon");
+const audio = document.getElementById("audio");
+const btn = document.getElementById("musicBtn");
 let playing = false;
 
-function fadeIn(target=0.55){
-  audio.volume = 0;
-  let v = 0;
-  const t = setInterval(()=>{
-    v += 0.05;
-    audio.volume = Math.min(v, target);
-    if(v >= target) clearInterval(t);
-  }, 120);
-}
-
-async function startMusic(){
+async function start(){
   if(playing) return;
   try{
     await audio.play();
-    fadeIn();
+    audio.volume = 0.6;
     playing = true;
-    icon.textContent = "⏸";
+    btn.textContent = "⏸";
   }catch(e){
-    icon.textContent = "▶";
+    btn.textContent = "▶";
   }
 }
-function stopMusic(){
+
+function stop(){
   audio.pause();
   playing = false;
-  icon.textContent = "▶";
+  btn.textContent = "▶";
 }
 
-window.addEventListener("load", startMusic);
-document.addEventListener("touchstart", startMusic, { once:true });
-document.addEventListener("click", startMusic, { once:true });
+// otomatik başlatmayı dene
+window.addEventListener("load", start);
+// mobilde ilk dokunuşta başlat
+document.addEventListener("touchstart", start, { once:true });
+document.addEventListener("click", start, { once:true });
 
-btn.addEventListener("click", (e)=>{
+// buton
+btn.addEventListener("click",(e)=>{
   e.stopPropagation();
-  if(playing) stopMusic();
-  else startMusic();
+  playing ? stop() : start();
 });
 </script>
 
