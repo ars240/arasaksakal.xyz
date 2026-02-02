@@ -27,7 +27,7 @@ body{
   position:fixed;
   top:-12px;
   border-radius:50%;
-  background:white;
+  background:#fff;
   pointer-events:none;
   animation:fall linear infinite;
   opacity:.8;
@@ -66,26 +66,42 @@ h1{
   text-transform:lowercase;
 }
 
-/* 🎀 + 🥷 YAN YANA */
+/* 🎀 + 🥷 ALT SAĞ */
 .secret-row{
   position:fixed;
-  right:14px;
-  bottom:14px;
+  right:18px;
+  bottom:18px;
   display:flex;
-  gap:10px;
-  font-size:22px;
-  cursor:pointer;
+  align-items:center;
+  gap:22px;          /* 👈 ARALIK ARTIRILDI */
   z-index:20;
-  opacity:.7;
 }
-.secret-row span:hover{opacity:1}
 
-/* mobilde alt orta */
+/* hello kitty PNG */
+.kitty-btn img{
+  width:28px;
+  height:28px;
+  object-fit:contain;
+  opacity:.7;
+  cursor:pointer;
+}
+.kitty-btn img:hover{opacity:1}
+
+/* ninja emoji */
+.ninja-btn{
+  font-size:22px;
+  opacity:.65;
+  cursor:pointer;
+  user-select:none;
+}
+.ninja-btn:hover{opacity:1}
+
+/* 📱 MOBİL */
 @media(max-width:768px){
   .secret-row{
     right:50%;
     transform:translateX(50%);
-    bottom:12px;
+    bottom:14px;
   }
 }
 </style>
@@ -99,10 +115,12 @@ h1{
   <div class="hint">(tıkla)</div>
 </div>
 
-<!-- 🎀 HASAN 🤍 GÜLAY + 🥷 BATU BERA -->
+<!-- 🎀 HELLO KITTY + 🥷 NINJA -->
 <div class="secret-row">
-  <span onclick="location.href='hasan-gulay.html'">🎀</span>
-  <span onclick="location.href='batu-bera.html'">🥷</span>
+  <div class="kitty-btn" onclick="location.href='hasan-gulay.html'">
+    <img src="hello-kitty.png" alt="Hasan Gülay">
+  </div>
+  <div class="ninja-btn" onclick="location.href='batu-bera.html'">🥷</div>
 </div>
 
 <script>
@@ -125,7 +143,8 @@ for(let i=0;i<120;i++){
 }
 
 // 🖱️ ANA KART TIKLAMA
-document.getElementById("card").addEventListener("click", ()=>{
+const card=document.getElementById("card");
+card.addEventListener("click", ()=>{
   window.location.href="links.html";
 });
 
@@ -134,7 +153,7 @@ document.addEventListener("mousemove", e=>{
   const cx=innerWidth/2, cy=innerHeight/2;
   const dx=(e.clientX-cx)/30;
   const dy=(e.clientY-cy)/30;
-  document.getElementById("card").style.transform =
+  card.style.transform =
     `rotateY(${dx}deg) rotateX(${-dy}deg)`;
 });
 </script>
