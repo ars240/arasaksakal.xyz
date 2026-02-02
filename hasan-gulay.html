@@ -19,10 +19,9 @@ body{
   place-items:center;
   font-family:Lobster,cursive;
   background:#f7c1d9; /* toz pembe */
-  color:#111;
 }
 
-/* 🌸 PARLAYAN YAZI */
+/* ✨ PARLAYAN YAZI */
 .text{
   text-align:center;
   font-size:64px;
@@ -35,7 +34,6 @@ body{
     0 0 32px rgba(224,98,154,.35);
   animation: glow 2.5s ease-in-out infinite;
 }
-
 @keyframes glow{
   0%,100%{
     text-shadow:
@@ -51,7 +49,7 @@ body{
   }
 }
 
-/* 🎀 HELLO KITTY YAĞIŞI */
+/* 🐱 HELLO KITTY YAĞIŞI */
 .kitty{
   position:fixed;
   top:-60px;
@@ -66,33 +64,66 @@ body{
   to{ transform: translateY(110vh); }
 }
 
+/* ⏯️ MÜZİK BUTONU */
+#musicBtn{
+  position:fixed;
+  right:12px;
+  bottom:12px;
+  width:34px;
+  height:34px;
+  border-radius:999px;
+  border:1px solid rgba(224,98,154,.35);
+  background:rgba(255,255,255,.28);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  cursor:pointer;
+  z-index:30;
+  display:grid;
+  place-items:center;
+  color:#e0629a;
+  font-size:14px;
+  opacity:.75;
+}
+#musicBtn:active{transform:scale(.96)}
+@media(max-width:768px){
+  #musicBtn{
+    right:50%;
+    transform:translateX(50%);
+    bottom:12px;
+  }
+}
+
 /* ⬅️ GERİ */
 .back{
   position:fixed;
-  left:14px;
-  top:14px;
-  padding:10px 12px;
-  border-radius:14px;
+  left:12px;
+  top:12px;
+  padding:8px 10px;
+  border-radius:12px;
   background:rgba(255,255,255,.35);
   border:1px solid rgba(0,0,0,.08);
   color:#111;
   font-family:system-ui, -apple-system, Segoe UI, Arial;
-  font-size:14px;
+  font-size:13px;
   text-decoration:none;
-  z-index:10;
+  z-index:30;
 }
 </style>
 </head>
 
 <body>
 
-<a class="back" href="index.html?v=1">← geri</a>
+<a class="back" href="index.html">← geri</a>
 
 <div class="text">
   Hasan<br>
   🤍<br>
   Gülay
 </div>
+
+<!-- 🎵 MÜZİK -->
+<audio id="loveAudio" src="hasan-gulay-song.mp3" loop preload="auto"></audio>
+<button id="musicBtn" title="müzik"><span id="musicIcon">⏸</span></button>
 
 <script>
 // 🐱 HELLO KITTY YAĞIŞI (KESİNTİSİZ)
@@ -112,9 +143,54 @@ for(let i=0;i<80;i++){
   k.style.animationDelay=(-Math.random()*dur)+"s";
 
   k.style.opacity=(0.55+Math.random()*0.45).toFixed(2);
-
   document.body.appendChild(k);
 }
+
+// 🎻 MÜZİK KONTROL
+const audio = document.getElementById("loveAudio");
+const btn   = document.getElementById("musicBtn");
+const icon  = document.getElementById("musicIcon");
+let playing = false;
+
+function fadeIn(target=0.6){
+  audio.volume = 0;
+  let v = 0;
+  const t = setInterval(()=>{
+    v += 0.05;
+    audio.volume = Math.min(v, target);
+    if(v >= target) clearInterval(t);
+  }, 120);
+}
+
+async function startMusic(){
+  if(playing) return;
+  try{
+    await audio.play();   // PC’de direkt, mobilde ilk dokunuşta
+    fadeIn();
+    playing = true;
+    icon.textContent = "⏸";
+  }catch(e){
+    icon.textContent = "▶";
+  }
+}
+function stopMusic(){
+  audio.pause();
+  playing = false;
+  icon.textContent = "▶";
+}
+
+// Sayfa açılınca dene
+window.addEventListener("load", startMusic);
+// Mobil için ilk dokunuşta başlat
+document.addEventListener("touchstart", startMusic, { once:true });
+document.addEventListener("click", startMusic, { once:true });
+
+// Buton
+btn.addEventListener("click", (e)=>{
+  e.stopPropagation();
+  if(playing) stopMusic();
+  else startMusic();
+});
 </script>
 
 </body>
