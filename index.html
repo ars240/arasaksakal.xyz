@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="tr">
 <head>
@@ -22,19 +23,21 @@ body{
   background: radial-gradient(circle at top, #111, #000);
 }
 
-/* KAR */
+/* ❄️ KAR – SÜREKLİ */
 .snow{
   position:fixed;
   top:-12px;
   border-radius:50%;
   background:white;
-  opacity:.8;
-  animation:fall linear infinite;
   pointer-events:none;
+  animation:fall linear infinite;
+  opacity:.8;
 }
-@keyframes fall{to{transform:translateY(110vh)}}
+@keyframes fall{
+  to{ transform:translateY(110vh); }
+}
 
-/* ANA KART */
+/* 🪟 ANA KART */
 .card{
   position:relative;
   width:min(520px,92vw);
@@ -45,31 +48,50 @@ body{
   border:1px solid rgba(255,255,255,.12);
   box-shadow:0 0 60px rgba(255,255,255,.12);
   text-align:center;
+  cursor:pointer;
+  transition:transform .1s linear;
 }
 
-/* HELLO KITTY BUTON */
+h1{
+  margin:0;
+  font-family:Lobster,cursive;
+  font-size:42px;
+  text-shadow:0 0 18px rgba(255,255,255,.25);
+}
+
+.hint{
+  margin-top:10px;
+  font-size:12px;
+  letter-spacing:2px;
+  opacity:.6;
+  text-transform:lowercase;
+}
+
+/* 🎀 HELLO KITTY GİZLİ BUTON */
 .kitty-btn{
   position:fixed;
-  right:22px;
-  bottom:22px;
-  width:54px;
-  height:54px;
-  border-radius:50%;
-  background:#ff7fbf;
-  display:grid;
-  place-items:center;
+  right:16px;
+  bottom:16px;
+  width:32px;
+  height:32px;
+  opacity:.55;
   cursor:pointer;
-  box-shadow:0 0 20px rgba(255,127,191,.6);
-  z-index:10;
+  z-index:20;
 }
-.kitty-btn span{
-  font-size:30px;
+.kitty-btn:hover{ opacity:.9; }
+
+.kitty-btn img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
 }
+
+/* 📱 MOBİLDE ALT ORTA */
 @media(max-width:768px){
   .kitty-btn{
     right:50%;
     transform:translateX(50%);
-    bottom:18px;
+    bottom:12px;
   }
 }
 </style>
@@ -77,27 +99,50 @@ body{
 
 <body>
 
-<div class="card">
-  <h1 style="font-family:Lobster,cursive;font-size:42px">Aras Aksakal</h1>
-  <div style="opacity:.6">(tıkla)</div>
+<!-- 🪟 KART -->
+<div class="card" id="card">
+  <h1>Aras Aksakal</h1>
+  <div class="hint">(tıkla)</div>
 </div>
 
-<!-- HELLO KITTY -->
+<!-- 🎀 HELLO KITTY (GERÇEK RESİM) -->
 <div class="kitty-btn" onclick="location.href='hasan-gulay.html'">
-  <span>🐱</span>
+  <!-- buraya kendi hello kitty png/webp koy -->
+  <img src="hello-kitty.png" alt="hello kitty">
 </div>
 
 <script>
-// KAR
-for(let i=0;i<90;i++){
+/* ❄️ KAR – BOŞLUK OLMASIN DİYE NEGATİF DELAY */
+for(let i=0;i<120;i++){
   const s=document.createElement("div");
   s.className="snow";
   s.style.left=Math.random()*100+"vw";
-  s.style.animationDuration=3+Math.random()*6+"s";
-  s.style.opacity=Math.random();
-  s.style.width=s.style.height=(4+Math.random()*4)+"px";
+
+  const size=3+Math.random()*3;
+  s.style.width=size+"px";
+  s.style.height=size+"px";
+
+  const dur=4+Math.random()*6;
+  s.style.animationDuration=dur+"s";
+  s.style.animationDelay=(-Math.random()*dur)+"s"; // 🔥 kritik fix
+
+  s.style.opacity=(0.3+Math.random()*0.7);
   document.body.appendChild(s);
 }
+
+/* 🖱️ KART TIKLAMA – ÇALIŞIYOR */
+const card=document.getElementById("card");
+card.addEventListener("click",()=>{
+  window.location.href="links.html?v="+Date.now();
+});
+
+/* 🌀 MOUSE TILT */
+document.addEventListener("mousemove",e=>{
+  const cx=innerWidth/2, cy=innerHeight/2;
+  const dx=(e.clientX-cx)/30;
+  const dy=(e.clientY-cy)/30;
+  card.style.transform=`rotateY(${dx}deg) rotateX(${-dy}deg)`;
+});
 </script>
 
 </body>
