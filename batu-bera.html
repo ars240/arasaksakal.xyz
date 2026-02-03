@@ -18,68 +18,48 @@ body{
   display:grid;
   place-items:center;
   font-family:Lobster,cursive;
-  background:#ffd54a; /* sarı */
+  background:#ffd54a;
 }
 
-/* ✨ PARLAYAN YAZI */
+/* YAZI */
 .text{
   text-align:center;
-  font-size:64px;
+  font-size:60px;
   line-height:1.15;
   z-index:5;
   color:#ff4d8d;
   text-shadow:
-    0 0 8px rgba(255,77,141,.60),
-    0 0 16px rgba(255,77,141,.45),
-    0 0 34px rgba(255,77,141,.35);
-  animation: glow 2.5s ease-in-out infinite;
-}
-@keyframes glow{
-  0%,100%{
-    text-shadow:
-      0 0 6px rgba(255,77,141,.45),
-      0 0 14px rgba(255,77,141,.35),
-      0 0 26px rgba(255,77,141,.25);
-  }
-  50%{
-    text-shadow:
-      0 0 10px rgba(255,77,141,.85),
-      0 0 22px rgba(255,77,141,.60),
-      0 0 40px rgba(255,77,141,.45);
-  }
+    0 0 6px rgba(255,77,141,.55),
+    0 0 16px rgba(255,77,141,.35);
 }
 
-/* 💓 HEART YAĞIŞI */
+/* 💓 HEART YAĞIŞI — HAFİF */
 .heart{
   position:fixed;
-  top:-80px;
+  top:-60px;
   pointer-events:none;
   z-index:2;
-  opacity:.95;
+  will-change: transform;
   animation: fall linear infinite;
-  filter: drop-shadow(0 6px 10px rgba(0,0,0,.10));
 }
 @keyframes fall{
-  to{ transform: translateY(110vh) rotate(360deg); }
+  to{ transform: translateY(110vh); }
 }
 
-/* ⬅️ GERİ */
+/* geri */
 .back{
   position:fixed;
-  left:14px;
-  top:14px;
+  left:12px;
+  top:12px;
   padding:8px 12px;
   border-radius:12px;
   background:rgba(255,255,255,.35);
-  border:1px solid rgba(0,0,0,.08);
   color:#111;
   font-family:system-ui,Arial;
   font-size:14px;
   text-decoration:none;
   z-index:10;
-  opacity:.85;
 }
-.back:hover{opacity:1}
 </style>
 </head>
 
@@ -95,31 +75,27 @@ body{
 
 <script>
 /*
-  Repo'ya şeffaf kalp PNG'yi şu isimle yükle:
-  ✅ heart-rain.png
+  KULLANILAN DOSYA:
+  heart-rain.png (şeffaf PNG)
 */
+
+// ⚡ OPTİMİZASYON AYARLARI
+const COUNT = 28;          // önce 70'ti → çok ağırdı
 const HEART_SRC = "heart-rain.png";
 
-// 💓 Yağış (kesintisiz: negatif delay ile)
-const COUNT = 70;
-
-for (let i = 0; i < COUNT; i++) {
+for(let i=0;i<COUNT;i++){
   const h = document.createElement("img");
   h.className = "heart";
   h.src = HEART_SRC;
-  h.alt = "heart";
 
-  h.style.left = (Math.random() * 100) + "vw";
+  h.style.left = (Math.random()*100) + "vw";
 
-  const size = 18 + Math.random() * 18;  // boyut
+  const size = 14 + Math.random()*14;   // daha küçük
   h.style.width = size + "px";
-  h.style.height = "auto";
 
-  const dur = 4.5 + Math.random() * 6.5; // hız
+  const dur = 7 + Math.random()*7;      // daha yavaş = daha az lag
   h.style.animationDuration = dur + "s";
-  h.style.animationDelay = (-Math.random() * dur) + "s";
-
-  h.style.opacity = (0.55 + Math.random() * 0.45).toFixed(2);
+  h.style.animationDelay = (-Math.random()*dur) + "s";
 
   document.body.appendChild(h);
 }
