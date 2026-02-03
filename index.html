@@ -66,35 +66,44 @@ h1{
   text-transform:lowercase;
 }
 
-/* 🎀 + 🥷 ALT SAĞ */
+/* 🎀 + 🗽 ALT SAĞ (YAN YANA) */
 .secret-row{
   position:fixed;
   right:18px;
   bottom:18px;
   display:flex;
   align-items:center;
-  gap:22px;          /* 👈 ARALIK ARTIRILDI */
+  gap:26px;            /* araları açtık */
   z-index:20;
 }
 
-/* hello kitty PNG */
+/* hello kitty */
 .kitty-btn img{
-  width:28px;
-  height:28px;
+  width:26px;
+  height:26px;
   object-fit:contain;
   opacity:.7;
   cursor:pointer;
+  transition:opacity .2s ease, transform .2s ease;
 }
-.kitty-btn img:hover{opacity:1}
+.kitty-btn img:hover{
+  opacity:1;
+  transform:scale(1.05);
+}
 
-/* ninja emoji */
-.ninja-btn{
-  font-size:22px;
-  opacity:.65;
+/* batu gizli logo */
+.batu-btn img{
+  width:28px;
+  height:28px;
+  object-fit:contain;
+  opacity:.6;
   cursor:pointer;
-  user-select:none;
+  transition:opacity .2s ease, transform .2s ease;
 }
-.ninja-btn:hover{opacity:1}
+.batu-btn img:hover{
+  opacity:1;
+  transform:scale(1.06);
+}
 
 /* 📱 MOBİL */
 @media(max-width:768px){
@@ -115,12 +124,14 @@ h1{
   <div class="hint">(tıkla)</div>
 </div>
 
-<!-- 🎀 HELLO KITTY + 🥷 NINJA -->
+<!-- 🎀 HELLO KITTY + 🗽 BATU LOGO -->
 <div class="secret-row">
   <div class="kitty-btn" onclick="location.href='hasan-gulay.html'">
     <img src="hello-kitty.png" alt="Hasan Gülay">
   </div>
-  <div class="ninja-btn" onclick="location.href='batu-bera.html'">🥷</div>
+  <div class="batu-btn" onclick="location.href='batu-bera.html'">
+    <img src="batu-logo.png" alt="Batu Bera">
+  </div>
 </div>
 
 <script>
