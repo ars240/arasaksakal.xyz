@@ -66,14 +66,14 @@ h1{
   text-transform:lowercase;
 }
 
-/* 🎀 + 🗽 ALT SAĞ (YAN YANA) */
+/* 🔒 GİZLİ BUTONLAR (YAN YANA) */
 .secret-row{
   position:fixed;
   right:18px;
   bottom:18px;
   display:flex;
   align-items:center;
-  gap:26px;            /* araları açtık */
+  gap:26px;
   z-index:20;
 }
 
@@ -84,26 +84,31 @@ h1{
   object-fit:contain;
   opacity:.7;
   cursor:pointer;
-  transition:opacity .2s ease, transform .2s ease;
+  transition:.2s;
 }
-.kitty-btn img:hover{
-  opacity:1;
-  transform:scale(1.05);
-}
+.kitty-btn img:hover{opacity:1; transform:scale(1.05);}
 
-/* batu gizli logo */
+/* batu logo */
 .batu-btn img{
   width:28px;
   height:28px;
   object-fit:contain;
   opacity:.6;
   cursor:pointer;
-  transition:opacity .2s ease, transform .2s ease;
+  transition:.2s;
 }
-.batu-btn img:hover{
-  opacity:1;
-  transform:scale(1.06);
+.batu-btn img:hover{opacity:1; transform:scale(1.06);}
+
+/* 🔥 FIRE GİZLİ */
+.fire-btn img{
+  width:22px;
+  height:22px;
+  object-fit:contain;
+  opacity:.35;
+  cursor:pointer;
+  transition:.2s;
 }
+.fire-btn img:hover{opacity:1; transform:scale(1.1);}
 
 /* 📱 MOBİL */
 @media(max-width:768px){
@@ -124,18 +129,23 @@ h1{
   <div class="hint">(tıkla)</div>
 </div>
 
-<!-- 🎀 HELLO KITTY + 🗽 BATU LOGO -->
+<!-- 🔒 GİZLİ BUTONLAR -->
 <div class="secret-row">
   <div class="kitty-btn" onclick="location.href='hasan-gulay.html'">
     <img src="hello-kitty.png" alt="Hasan Gülay">
   </div>
+
   <div class="batu-btn" onclick="location.href='batu-bera.html'">
     <img src="batu-logo.png" alt="Batu Bera">
+  </div>
+
+  <div class="fire-btn" onclick="location.href='fire.html'">
+    <img src="fire.png" alt="fire">
   </div>
 </div>
 
 <script>
-// ❄️ KAR – KESİNTİSİZ
+// ❄️ KAR
 for(let i=0;i<120;i++){
   const s=document.createElement("div");
   s.className="snow";
@@ -153,18 +163,17 @@ for(let i=0;i<120;i++){
   document.body.appendChild(s);
 }
 
-// 🖱️ ANA KART TIKLAMA
-const card=document.getElementById("card");
-card.addEventListener("click", ()=>{
-  window.location.href="links.html";
+// karta tıklama
+document.getElementById("card").addEventListener("click", ()=>{
+  location.href="links.html";
 });
 
-// 🌀 MOUSE TILT
+// mouse tilt
 document.addEventListener("mousemove", e=>{
   const cx=innerWidth/2, cy=innerHeight/2;
   const dx=(e.clientX-cx)/30;
   const dy=(e.clientY-cy)/30;
-  card.style.transform =
+  document.getElementById("card").style.transform=
     `rotateY(${dx}deg) rotateX(${-dy}deg)`;
 });
 </script>
