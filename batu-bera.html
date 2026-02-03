@@ -4,48 +4,128 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Batu 💓 Ester</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+
 <style>
 *{box-sizing:border-box}
 html,body{height:100%}
+
 body{
-  margin:0;height:100vh;overflow:hidden;
-  display:grid;place-items:center;
+  margin:0;
+  height:100vh;
+  overflow:hidden;
+  display:grid;
+  place-items:center;
   font-family:Lobster,cursive;
-  background:#ffd54a;
+  background:#ffd54a; /* sarı */
 }
+
+/* ✨ PARLAYAN YAZI */
 .text{
-  text-align:center;font-size:60px;line-height:1.15;z-index:5;
+  text-align:center;
+  font-size:64px;
+  line-height:1.15;
+  z-index:5;
   color:#ff4d8d;
-  text-shadow:0 0 6px rgba(255,77,141,.55), 0 0 16px rgba(255,77,141,.35);
+  text-shadow:
+    0 0 8px rgba(255,77,141,.60),
+    0 0 16px rgba(255,77,141,.45),
+    0 0 34px rgba(255,77,141,.35);
+  animation: glow 2.5s ease-in-out infinite;
 }
+@keyframes glow{
+  0%,100%{
+    text-shadow:
+      0 0 6px rgba(255,77,141,.45),
+      0 0 14px rgba(255,77,141,.35),
+      0 0 26px rgba(255,77,141,.25);
+  }
+  50%{
+    text-shadow:
+      0 0 10px rgba(255,77,141,.85),
+      0 0 22px rgba(255,77,141,.60),
+      0 0 40px rgba(255,77,141,.45);
+  }
+}
+
+/* 💓 HEART YAĞIŞI (optimize) */
 .heart{
-  position:fixed;top:-60px;pointer-events:none;z-index:2;
-  will-change:transform;
-  animation:fall linear infinite;
+  position:fixed;
+  top:-60px;
+  pointer-events:none;
+  z-index:2;
+  will-change: transform;
+  animation: fall linear infinite;
   opacity:.9;
 }
-@keyframes fall{ to{ transform:translateY(110vh); } }
+@keyframes fall{
+  to{ transform: translateY(110vh); }
+}
+
+/* ⬅️ GERİ */
 .back{
-  position:fixed;left:12px;top:12px;
-  padding:8px 12px;border-radius:12px;
+  position:fixed;
+  left:14px;
+  top:14px;
+  padding:8px 12px;
+  border-radius:12px;
   background:rgba(255,255,255,.35);
-  color:#111;font-family:system-ui,Arial;font-size:14px;
-  text-decoration:none;z-index:10;
+  border:1px solid rgba(0,0,0,.08);
+  color:#111;
+  font-family:system-ui,Arial;
+  font-size:14px;
+  text-decoration:none;
+  z-index:10;
+  opacity:.85;
+}
+.back:hover{opacity:1}
+
+/* 🎵 HASAN-GÜLAY ile aynı ŞIK MÜZİK BUTONU */
+.music{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  width:36px;
+  height:36px;
+  border-radius:999px;
+  background:rgba(255,255,255,.28);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border:1px solid rgba(255,77,141,.35);
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+  z-index:10;
+  opacity:.55;
+  transition:opacity .2s ease, transform .2s ease;
+}
+.music:hover{
+  opacity:1;
+  transform:scale(1.05);
+}
+.music svg{
+  width:14px;
+  height:14px;
+  fill:#ff4d8d;
 }
 </style>
 </head>
+
 <body>
 
 <a class="back" href="index.html">← geri</a>
 
 <div class="text">
-  Batu<br>💓<br>Ester
+  Batu<br>
+  💓<br>
+  Ester
 </div>
 
+<!-- 💓 YAĞIŞ -->
 <script>
 const HEART_SRC = "heart-rain.png";
-const COUNT = 70; // çok olsun dedin -> 70
+const COUNT = 70;
 const MIN_SIZE = 12, MAX_SIZE = 22;
 const MIN_DUR = 7, MAX_DUR = 15;
 
@@ -70,6 +150,55 @@ cacheImg.onload = () => {
     document.body.appendChild(h);
   }
 };
+</script>
+
+<!-- 🎵 MÜZİK (Aynı şarkı: hasan-gulay-song.mp3) -->
+<audio id="audio" src="hasan-gulay-song.mp3" loop preload="auto"></audio>
+
+<div class="music" id="musicBtn">
+  <!-- pause -->
+  <svg id="pauseIcon" viewBox="0 0 24 24">
+    <rect x="6" y="5" width="4" height="14"></rect>
+    <rect x="14" y="5" width="4" height="14"></rect>
+  </svg>
+  <!-- play -->
+  <svg id="playIcon" viewBox="0 0 24 24" style="display:none">
+    <polygon points="7,5 19,12 7,19"></polygon>
+  </svg>
+</div>
+
+<script>
+const audio = document.getElementById("audio");
+const btn = document.getElementById("musicBtn");
+const playIcon = document.getElementById("playIcon");
+const pauseIcon = document.getElementById("pauseIcon");
+let playing = false;
+
+async function start(){
+  if(playing) return;
+  try{
+    await audio.play();
+    audio.volume = 0.6;
+    playing = true;
+    playIcon.style.display="none";
+    pauseIcon.style.display="block";
+  }catch(e){}
+}
+function stop(){
+  audio.pause();
+  playing=false;
+  playIcon.style.display="block";
+  pauseIcon.style.display="none";
+}
+
+window.addEventListener("load", start);
+document.addEventListener("click", start, { once:true });
+document.addEventListener("touchstart", start, { once:true });
+
+btn.addEventListener("click",(e)=>{
+  e.stopPropagation();
+  playing ? stop() : start();
+});
 </script>
 
 </body>
