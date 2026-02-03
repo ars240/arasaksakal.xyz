@@ -21,13 +21,13 @@ body{
   background:#f7c1d9; /* toz pembe */
 }
 
-/* ✨ PARLAYAN YAZI */
+/* 💗 PARLAYAN YAZI */
 .text{
   text-align:center;
   font-size:64px;
   line-height:1.15;
   z-index:5;
-  color:#e0629a; /* koyu pembe */
+  color:#e0629a;
   text-shadow:
     0 0 8px rgba(224,98,154,.6),
     0 0 16px rgba(224,98,154,.45),
@@ -49,7 +49,7 @@ body{
   }
 }
 
-/* 🐱 HELLO KITTY YAĞIŞI */
+/* 🐱 KITTY YAĞIŞI */
 .kitty{
   position:fixed;
   top:-60px;
@@ -64,49 +64,51 @@ body{
   to{ transform: translateY(110vh); }
 }
 
-/* ⏯️ MÜZİK BUTONU */
-#musicBtn{
-  position:fixed;
-  right:12px;
-  bottom:12px;
-  width:34px;
-  height:34px;
-  border-radius:999px;
-  border:1px solid rgba(224,98,154,.35);
-  background:rgba(255,255,255,.28);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  cursor:pointer;
-  z-index:30;
-  display:grid;
-  place-items:center;
-  color:#e0629a;
-  font-size:14px;
-  opacity:.75;
-}
-#musicBtn:active{transform:scale(.96)}
-@media(max-width:768px){
-  #musicBtn{
-    right:50%;
-    transform:translateX(50%);
-    bottom:12px;
-  }
-}
-
 /* ⬅️ GERİ */
 .back{
   position:fixed;
-  left:12px;
-  top:12px;
-  padding:8px 10px;
+  left:14px;
+  top:14px;
+  padding:8px 12px;
   border-radius:12px;
   background:rgba(255,255,255,.35);
   border:1px solid rgba(0,0,0,.08);
   color:#111;
-  font-family:system-ui, -apple-system, Segoe UI, Arial;
-  font-size:13px;
+  font-family:system-ui,Arial;
+  font-size:14px;
   text-decoration:none;
-  z-index:30;
+  z-index:10;
+  opacity:.85;
+}
+.back:hover{opacity:1}
+
+/* 🎵 ŞIK MÜZİK BUTONU */
+.music{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  width:36px;
+  height:36px;
+  border-radius:999px;
+  background:rgba(255,255,255,.28);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border:1px solid rgba(224,98,154,.35);
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+  z-index:10;
+  opacity:.55;
+  transition:opacity .2s ease, transform .2s ease;
+}
+.music:hover{
+  opacity:1;
+  transform:scale(1.05);
+}
+.music svg{
+  width:14px;
+  height:14px;
+  fill:#e0629a;
 }
 </style>
 </head>
@@ -122,17 +124,26 @@ body{
 </div>
 
 <!-- 🎵 MÜZİK -->
-<audio id="loveAudio" src="hasan-gulay-song.mp3" loop preload="auto"></audio>
-<button id="musicBtn" title="müzik"><span id="musicIcon">⏸</span></button>
+<audio id="audio" src="hasan-gulay-song.mp3" loop preload="auto"></audio>
+
+<div class="music" id="musicBtn">
+  <!-- pause -->
+  <svg id="pauseIcon" viewBox="0 0 24 24">
+    <rect x="6" y="5" width="4" height="14"></rect>
+    <rect x="14" y="5" width="4" height="14"></rect>
+  </svg>
+  <!-- play -->
+  <svg id="playIcon" viewBox="0 0 24 24" style="display:none">
+    <polygon points="7,5 19,12 7,19"></polygon>
+  </svg>
+</div>
 
 <script>
-// 🐱 HELLO KITTY YAĞIŞI (KESİNTİSİZ)
-for(let i=0;i<80;i++){
+// 🐱 KITTY YAĞIŞI
+for(let i=0;i<70;i++){
   const k=document.createElement("img");
   k.className="kitty";
   k.src="hello-kitty.png";
-  k.alt="hello kitty";
-
   k.style.left=(Math.random()*100)+"vw";
 
   const size=16+Math.random()*14;
@@ -141,55 +152,43 @@ for(let i=0;i<80;i++){
   const dur=4+Math.random()*6;
   k.style.animationDuration=dur+"s";
   k.style.animationDelay=(-Math.random()*dur)+"s";
-
-  k.style.opacity=(0.55+Math.random()*0.45).toFixed(2);
   document.body.appendChild(k);
 }
 
-// 🎻 MÜZİK KONTROL
-const audio = document.getElementById("loveAudio");
-const btn   = document.getElementById("musicBtn");
-const icon  = document.getElementById("musicIcon");
+// 🎵 MÜZİK
+const audio = document.getElementById("audio");
+const btn = document.getElementById("musicBtn");
+const playIcon = document.getElementById("playIcon");
+const pauseIcon = document.getElementById("pauseIcon");
 let playing = false;
 
-function fadeIn(target=0.6){
-  audio.volume = 0;
-  let v = 0;
-  const t = setInterval(()=>{
-    v += 0.05;
-    audio.volume = Math.min(v, target);
-    if(v >= target) clearInterval(t);
-  }, 120);
-}
-
-async function startMusic(){
+async function start(){
   if(playing) return;
   try{
-    await audio.play();   // PC’de direkt, mobilde ilk dokunuşta
-    fadeIn();
+    await audio.play();
+    audio.volume = 0.6;
     playing = true;
-    icon.textContent = "⏸";
-  }catch(e){
-    icon.textContent = "▶";
-  }
+    playIcon.style.display="none";
+    pauseIcon.style.display="block";
+  }catch(e){}
 }
-function stopMusic(){
+function stop(){
   audio.pause();
-  playing = false;
-  icon.textContent = "▶";
+  playing=false;
+  playIcon.style.display="block";
+  pauseIcon.style.display="none";
 }
 
-// Sayfa açılınca dene
-window.addEventListener("load", startMusic);
-// Mobil için ilk dokunuşta başlat
-document.addEventListener("touchstart", startMusic, { once:true });
-document.addEventListener("click", startMusic, { once:true });
+// otomatik başlatmayı dene
+window.addEventListener("load", start);
+// mobilde ilk dokunuş
+document.addEventListener("click", start, { once:true });
+document.addEventListener("touchstart", start, { once:true });
 
-// Buton
-btn.addEventListener("click", (e)=>{
+// buton
+btn.addEventListener("click",(e)=>{
   e.stopPropagation();
-  if(playing) stopMusic();
-  else startMusic();
+  playing ? stop() : start();
 });
 </script>
 
