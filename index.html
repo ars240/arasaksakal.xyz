@@ -38,32 +38,20 @@ body{
 
 /* ANA KART */
 .card{
-  position:relative;
   width:min(520px,92vw);
   padding:36px 32px 28px;
   border-radius:24px;
   background:rgba(255,255,255,.08);
   backdrop-filter:blur(14px);
-  border:1px solid rgba(255,255,255,.12);
   box-shadow:0 0 60px rgba(255,255,255,.12);
   text-align:center;
   cursor:pointer;
-  transition:transform .1s linear;
 }
 
 h1{
   margin:0;
   font-family:Lobster,cursive;
   font-size:42px;
-  text-shadow:0 0 18px rgba(255,255,255,.25);
-}
-
-.hint{
-  margin-top:10px;
-  font-size:12px;
-  letter-spacing:2px;
-  opacity:.6;
-  text-transform:lowercase;
 }
 
 /* GİZLİ BUTONLAR */
@@ -77,51 +65,23 @@ h1{
   z-index:20;
 }
 
-/* hello kitty */
-.kitty-btn img{
+/* ortak */
+.secret-row img{
+  cursor:pointer;
+  transition:.2s;
+}
+
+/* fire-heart */
+.fireheart img{
   width:26px;
-  height:26px;
-  object-fit:contain;
-  opacity:.7;
-  cursor:pointer;
-  transition:.2s;
-}
-.kitty-btn img:hover{opacity:1; transform:scale(1.05);}
-
-/* batu */
-.batu-btn img{
-  width:28px;
-  height:28px;
-  object-fit:contain;
-  opacity:.6;
-  cursor:pointer;
-  transition:.2s;
-}
-.batu-btn img:hover{opacity:1; transform:scale(1.06);}
-
-/* fire */
-.fire-btn img{
-  width:22px;
-  height:22px;
-  object-fit:contain;
   opacity:.35;
-  cursor:pointer;
-  transition:.2s;
 }
-.fire-btn img:hover{opacity:1; transform:scale(1.1);}
-
-/* clown / akif */
-.clown-btn img{
-  width:24px;
-  height:24px;
-  object-fit:contain;
-  opacity:.3;
-  cursor:pointer;
-  transition:.2s;
+.fireheart img:hover{
+  opacity:1;
+  transform:scale(1.1);
 }
-.clown-btn img:hover{opacity:1; transform:scale(1.08);}
 
-/* MOBİL */
+/* mobil */
 @media(max-width:768px){
   .secret-row{
     right:50%;
@@ -134,26 +94,13 @@ h1{
 
 <body>
 
-<div class="card" id="card">
+<div class="card" onclick="location.href='links.html'">
   <h1>Aras Aksakal</h1>
-  <div class="hint">(tıkla)</div>
 </div>
 
 <div class="secret-row">
-  <div class="kitty-btn" onclick="location.href='hasan-gulay.html'">
-    <img src="hello-kitty.png">
-  </div>
-
-  <div class="batu-btn" onclick="location.href='batu-bera.html'">
-    <img src="batu-logo.png">
-  </div>
-
-  <div class="fire-btn" onclick="location.href='fire.html'">
-    <img src="fire.png">
-  </div>
-
-  <div class="clown-btn" onclick="location.href='akif.html'">
-    <img src="clown-emoji.png">
+  <div class="fireheart" onclick="location.href='akif-ask.html'">
+    <img src="fire-heart.PNG" alt="akif ask">
   </div>
 </div>
 
@@ -171,18 +118,6 @@ for(let i=0;i<120;i++){
   s.style.opacity=(0.3+Math.random()*0.7);
   document.body.appendChild(s);
 }
-
-document.getElementById("card").addEventListener("click", ()=>{
-  location.href="links.html";
-});
-
-document.addEventListener("mousemove", e=>{
-  const cx=innerWidth/2, cy=innerHeight/2;
-  const dx=(e.clientX-cx)/30;
-  const dy=(e.clientY-cy)/30;
-  document.getElementById("card").style.transform=
-    `rotateY(${dx}deg) rotateX(${-dy}deg)`;
-});
 </script>
 
 </body>
