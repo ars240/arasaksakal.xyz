@@ -14,8 +14,6 @@ html,body{
   overflow:hidden;
   background:#000;
 }
-
-/* FOTO */
 .bg{
   position:fixed;
   inset:0;
@@ -25,33 +23,39 @@ html,body{
 </head>
 
 <body>
-
 <div class="bg"></div>
 
-<audio id="audio" src="akifask.mp3" loop></audio>
+<audio id="audio" src="akifask.mp3" loop preload="auto"></audio>
 
 <script>
 const a = document.getElementById("audio");
+const START_AT = 8;
 
-// metadata gelince 8. saniyeye al
-a.addEventListener("loadedmetadata", ()=>{
-  a.currentTime = 8;
-});
-
-// autoplay dene
-window.addEventListener("load", ()=>{
+function tryPlay(){
+  // iOS bazen metadata gelmeden time set etmeyi sevmiyor
+  if (isFinite(a.duration) && a.duration > START_AT) a.currentTime = START_AT;
   a.volume = 0.7;
   a.play().catch(()=>{});
+}
+
+a.addEventListener("loadedmetadata", ()=>{
+  if (a.duration > START_AT) a.currentTime = START_AT;
 });
 
-// mobil için ilk dokunuş
-document.addEventListener("click", ()=>{
-  if(a.paused){
-    a.currentTime = 8;
-    a.play().catch(()=>{});
-  }
-},{ once:true });
-</script>
+// PC’de dene
+window.addEventListener("load", ()=>{
+  // autoplay için önce muted play, sonra unmute (daha çok çalışır)
+  a.muted = true;
+  a.play().then(()=>{
+    if (a.duration > START_AT) a.currentTime = START_AT;
+    a.muted = false;
+    a.volume = 0.7;
+  }).catch(()=>{});
+});
 
+// Mobilde garanti: ilk dokunuşta başlat
+document.addEventListener("click", tryPlay, { once:true });
+document.addEventListener("touchstart", tryPlay, { once:true });
+</script>
 </body>
 </html>
