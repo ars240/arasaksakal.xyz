@@ -14,7 +14,6 @@ html,body{
   background:#000;
   overflow:hidden;
 }
-
 video{
   position:fixed;
   inset:0;
@@ -23,51 +22,47 @@ video{
   object-fit:cover;
   background:#000;
 }
-
-/* tıkla yazısı */
-.tap{
+.back{
   position:fixed;
-  inset:0;
-  display:grid;
-  place-items:center;
-  color:white;
+  left:14px;
+  top:14px;
+  padding:8px 12px;
+  border-radius:12px;
+  background:rgba(0,0,0,.45);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  color:#fff;
   font-family:system-ui,Arial;
   font-size:14px;
-  opacity:.6;
-  z-index:5;
+  text-decoration:none;
+  z-index:10;
+  opacity:.8;
 }
+.back:hover{opacity:1}
 </style>
 </head>
 
 <body>
 
-<div class="tap">dokun / tıkla</div>
+<a class="back" href="index.html">← geri</a>
 
-<video id="vid" playsinline loop>
-  <source src="akif.mov" type="video/quicktime">
-</video>
+<video
+  src="akif.MOV"
+  autoplay
+  muted
+  loop
+  playsinline
+></video>
 
 <script>
-const v = document.getElementById("vid");
-const tap = document.querySelector(".tap");
-
-// bazı tarayıcılarda autoplay çalışmaz
-function playVideo(){
-  v.muted = false;
-  v.volume = 0.8;
-  v.play().catch(()=>{});
-  tap.style.display="none";
-}
-
-// dene
-window.addEventListener("load", ()=>{
-  v.muted = true;
-  v.play().catch(()=>{});
-});
-
-// kullanıcı etkileşimiyle garanti
-document.addEventListener("click", playVideo, { once:true });
-document.addEventListener("touchstart", playVideo, { once:true });
+document.addEventListener("click",()=>{
+  const v=document.querySelector("video");
+  if(v.muted){
+    v.muted=false;
+    v.volume=0.7;
+    v.play().catch(()=>{});
+  }
+},{once:true});
 </script>
 
 </body>
