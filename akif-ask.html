@@ -14,48 +14,45 @@ html,body{
   overflow:hidden;
   background:#000;
 }
+
+/* FOTO */
 .bg{
   position:fixed;
   inset:0;
   background:url("akif1.jpeg") center/cover no-repeat;
 }
+
+/* gizli tıklama alanı */
+.tap{
+  position:fixed;
+  inset:0;
+}
 </style>
 </head>
 
 <body>
-<div class="bg"></div>
 
-<audio id="audio" src="akifask.mp3" loop preload="auto"></audio>
+<div class="bg"></div>
+<div class="tap"></div>
+
+<audio id="audio" src="akifask.mp3" preload="auto"></audio>
 
 <script>
 const a = document.getElementById("audio");
-const START_AT = 8;
+let started = false;
 
-function tryPlay(){
-  // iOS bazen metadata gelmeden time set etmeyi sevmiyor
-  if (isFinite(a.duration) && a.duration > START_AT) a.currentTime = START_AT;
-  a.volume = 0.7;
+function startMusic(){
+  if(started) return;
+  started = true;
+  a.currentTime = 0;   // 🔥 0. saniye
+  a.volume = 0.8;
   a.play().catch(()=>{});
 }
 
-a.addEventListener("loadedmetadata", ()=>{
-  if (a.duration > START_AT) a.currentTime = START_AT;
-});
-
-// PC’de dene
-window.addEventListener("load", ()=>{
-  // autoplay için önce muted play, sonra unmute (daha çok çalışır)
-  a.muted = true;
-  a.play().then(()=>{
-    if (a.duration > START_AT) a.currentTime = START_AT;
-    a.muted = false;
-    a.volume = 0.7;
-  }).catch(()=>{});
-});
-
-// Mobilde garanti: ilk dokunuşta başlat
-document.addEventListener("click", tryPlay, { once:true });
-document.addEventListener("touchstart", tryPlay, { once:true });
+// KULLANICI ETKİLEŞİMİ = GARANTİ
+document.querySelector(".tap").addEventListener("click", startMusic);
+document.querySelector(".tap").addEventListener("touchstart", startMusic);
 </script>
+
 </body>
 </html>
