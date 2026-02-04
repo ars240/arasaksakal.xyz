@@ -22,7 +22,7 @@ body{
   background: radial-gradient(circle at top, #111, #000);
 }
 
-/* ❄️ KAR */
+/* KAR */
 .snow{
   position:fixed;
   top:-12px;
@@ -36,7 +36,7 @@ body{
   to{ transform:translateY(110vh); }
 }
 
-/* 🪟 ANA KART */
+/* ANA KART */
 .card{
   position:relative;
   width:min(520px,92vw);
@@ -66,14 +66,14 @@ h1{
   text-transform:lowercase;
 }
 
-/* 🔒 GİZLİ BUTONLAR (YAN YANA) */
+/* GİZLİ BUTONLAR */
 .secret-row{
   position:fixed;
   right:18px;
   bottom:18px;
   display:flex;
   align-items:center;
-  gap:26px;
+  gap:22px;
   z-index:20;
 }
 
@@ -88,7 +88,7 @@ h1{
 }
 .kitty-btn img:hover{opacity:1; transform:scale(1.05);}
 
-/* batu logo */
+/* batu */
 .batu-btn img{
   width:28px;
   height:28px;
@@ -99,7 +99,7 @@ h1{
 }
 .batu-btn img:hover{opacity:1; transform:scale(1.06);}
 
-/* 🔥 FIRE GİZLİ */
+/* fire */
 .fire-btn img{
   width:22px;
   height:22px;
@@ -110,7 +110,18 @@ h1{
 }
 .fire-btn img:hover{opacity:1; transform:scale(1.1);}
 
-/* 📱 MOBİL */
+/* clown / akif */
+.clown-btn img{
+  width:24px;
+  height:24px;
+  object-fit:contain;
+  opacity:.3;
+  cursor:pointer;
+  transition:.2s;
+}
+.clown-btn img:hover{opacity:1; transform:scale(1.08);}
+
+/* MOBİL */
 @media(max-width:768px){
   .secret-row{
     right:50%;
@@ -123,52 +134,48 @@ h1{
 
 <body>
 
-<!-- 🪟 ANA KART -->
 <div class="card" id="card">
   <h1>Aras Aksakal</h1>
   <div class="hint">(tıkla)</div>
 </div>
 
-<!-- 🔒 GİZLİ BUTONLAR -->
 <div class="secret-row">
   <div class="kitty-btn" onclick="location.href='hasan-gulay.html'">
-    <img src="hello-kitty.png" alt="Hasan Gülay">
+    <img src="hello-kitty.png">
   </div>
 
   <div class="batu-btn" onclick="location.href='batu-bera.html'">
-    <img src="batu-logo.png" alt="Batu Bera">
+    <img src="batu-logo.png">
   </div>
 
   <div class="fire-btn" onclick="location.href='fire.html'">
-    <img src="fire.png" alt="fire">
+    <img src="fire.png">
+  </div>
+
+  <div class="clown-btn" onclick="location.href='akif.html'">
+    <img src="clown-emoji.png">
   </div>
 </div>
 
 <script>
-// ❄️ KAR
 for(let i=0;i<120;i++){
   const s=document.createElement("div");
   s.className="snow";
   s.style.left=Math.random()*100+"vw";
-
   const size=3+Math.random()*3;
   s.style.width=size+"px";
   s.style.height=size+"px";
-
   const dur=4+Math.random()*6;
   s.style.animationDuration=dur+"s";
   s.style.animationDelay=(-Math.random()*dur)+"s";
   s.style.opacity=(0.3+Math.random()*0.7);
-
   document.body.appendChild(s);
 }
 
-// karta tıklama
 document.getElementById("card").addEventListener("click", ()=>{
   location.href="links.html";
 });
 
-// mouse tilt
 document.addEventListener("mousemove", e=>{
   const cx=innerWidth/2, cy=innerHeight/2;
   const dx=(e.clientX-cx)/30;
