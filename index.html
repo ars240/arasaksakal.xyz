@@ -22,7 +22,7 @@ body{
   background: radial-gradient(circle at top, #111, #000);
 }
 
-/* KAR */
+/* ❄️ KAR */
 .snow{
   position:fixed;
   top:-12px;
@@ -32,29 +32,37 @@ body{
   animation:fall linear infinite;
   opacity:.8;
 }
-@keyframes fall{
-  to{ transform:translateY(110vh); }
-}
+@keyframes fall{ to{ transform:translateY(110vh); } }
 
-/* ANA KART */
+/* 🪟 ANA KART */
 .card{
+  position:relative;
   width:min(520px,92vw);
   padding:36px 32px 28px;
   border-radius:24px;
   background:rgba(255,255,255,.08);
   backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,.12);
   box-shadow:0 0 60px rgba(255,255,255,.12);
   text-align:center;
   cursor:pointer;
+  transition:transform .1s linear;
 }
-
 h1{
   margin:0;
   font-family:Lobster,cursive;
   font-size:42px;
+  text-shadow:0 0 18px rgba(255,255,255,.25);
+}
+.hint{
+  margin-top:10px;
+  font-size:12px;
+  letter-spacing:2px;
+  opacity:.6;
+  text-transform:lowercase;
 }
 
-/* GİZLİ BUTONLAR */
+/* 🔒 GİZLİ BUTONLAR */
 .secret-row{
   position:fixed;
   right:18px;
@@ -64,24 +72,29 @@ h1{
   gap:22px;
   z-index:20;
 }
+.secret-row img{ cursor:pointer; transition:.2s; object-fit:contain; }
 
-/* ortak */
-.secret-row img{
-  cursor:pointer;
-  transition:.2s;
-}
+/* kitty */
+.kitty-btn img{ width:26px; height:26px; opacity:.7; }
+.kitty-btn img:hover{ opacity:1; transform:scale(1.05); }
 
-/* fire-heart */
-.fireheart img{
-  width:26px;
-  opacity:.35;
-}
-.fireheart img:hover{
-  opacity:1;
-  transform:scale(1.1);
-}
+/* batu */
+.batu-btn img{ width:28px; height:28px; opacity:.6; }
+.batu-btn img:hover{ opacity:1; transform:scale(1.06); }
 
-/* mobil */
+/* fire */
+.fire-btn img{ width:22px; height:22px; opacity:.35; }
+.fire-btn img:hover{ opacity:1; transform:scale(1.1); }
+
+/* clown */
+.clown-btn img{ width:24px; height:24px; opacity:.30; }
+.clown-btn img:hover{ opacity:1; transform:scale(1.08); }
+
+/* fire-heart (PNG büyük harf) */
+.fireheart-btn img{ width:26px; height:26px; opacity:.35; }
+.fireheart-btn img:hover{ opacity:1; transform:scale(1.1); }
+
+/* 📱 MOBİL */
 @media(max-width:768px){
   .secret-row{
     right:50%;
@@ -94,17 +107,35 @@ h1{
 
 <body>
 
-<div class="card" onclick="location.href='links.html'">
+<div class="card" id="card">
   <h1>Aras Aksakal</h1>
+  <div class="hint">(tıkla)</div>
 </div>
 
 <div class="secret-row">
-  <div class="fireheart" onclick="location.href='akif-ask.html'">
-    <img src="fire-heart.PNG" alt="akif ask">
+  <div class="kitty-btn" onclick="location.href='hasan-gulay.html'">
+    <img src="hello-kitty.png" alt="Hasan Gülay">
+  </div>
+
+  <div class="batu-btn" onclick="location.href='batu-bera.html'">
+    <img src="batu-logo.png" alt="Batu Bera">
+  </div>
+
+  <div class="fire-btn" onclick="location.href='fire.html'">
+    <img src="fire.png" alt="Fire">
+  </div>
+
+  <div class="clown-btn" onclick="location.href='akif.html'">
+    <img src="clown-emoji.png" alt="Akif">
+  </div>
+
+  <div class="fireheart-btn" onclick="location.href='akif-ask.html'">
+    <img src="fire-heart.PNG" alt="Akif Ask">
   </div>
 </div>
 
 <script>
+// ❄️ KAR – kesintisiz
 for(let i=0;i<120;i++){
   const s=document.createElement("div");
   s.className="snow";
@@ -118,6 +149,18 @@ for(let i=0;i<120;i++){
   s.style.opacity=(0.3+Math.random()*0.7);
   document.body.appendChild(s);
 }
+
+// karta tıklama
+document.getElementById("card").addEventListener("click", ()=>location.href="links.html");
+
+// mouse tilt
+document.addEventListener("mousemove", e=>{
+  const cx=innerWidth/2, cy=innerHeight/2;
+  const dx=(e.clientX-cx)/30;
+  const dy=(e.clientY-cy)/30;
+  document.getElementById("card").style.transform =
+    `rotateY(${dx}deg) rotateX(${-dy}deg)`;
+});
 </script>
 
 </body>
