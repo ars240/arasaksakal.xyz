@@ -18,7 +18,6 @@ body{
   display:grid;
   place-items:center;
   font-family:Inter,Arial,sans-serif;
-  color:#fff;
   background:radial-gradient(circle at top, #111, #000);
 }
 
@@ -37,20 +36,18 @@ body{
 /* 🧭 MERKEZ MENÜ */
 .menu{
   display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(140px,1fr));
-  gap:26px;
+  grid-template-columns:repeat(auto-fit, minmax(120px,1fr));
+  gap:28px;
   width:min(520px,92vw);
   z-index:10;
 }
 
 .menu button{
-  font-size:34px;
-  padding:26px 18px;
+  padding:28px;
   border-radius:22px;
   border:1px solid rgba(255,255,255,.15);
   background:rgba(255,255,255,.08);
   backdrop-filter:blur(14px);
-  color:white;
   cursor:pointer;
   transition:.2s;
   box-shadow:0 0 40px rgba(255,255,255,.08);
@@ -61,12 +58,13 @@ body{
   background:rgba(255,255,255,.16);
 }
 
-.menu span{
-  display:block;
-  font-size:13px;
-  margin-top:8px;
-  opacity:.7;
-  letter-spacing:1px;
+/* ikonlar */
+.menu img{
+  width:48px;
+  height:48px;
+  object-fit:contain;
+  opacity:.9;
+  pointer-events:none;
 }
 </style>
 </head>
@@ -75,33 +73,27 @@ body{
 
 <div class="menu">
   <button onclick="location.href='hasan-gulay.html'">
-    🐱
-    <span>hasan</span>
+    <img src="hello-kitty.png" alt="">
   </button>
 
   <button onclick="location.href='batu-bera.html'">
-    🪨
-    <span>batu</span>
+    <img src="batu-logo.png" alt="">
   </button>
 
   <button onclick="location.href='fire.html'">
-    🔥
-    <span>fire</span>
+    <img src="fire.png" alt="">
   </button>
 
   <button onclick="location.href='akif.html'">
-    🤡
-    <span>akif</span>
+    <img src="clown-emoji.png" alt="">
   </button>
 
   <button onclick="location.href='akif-ask.html'">
-    ❤️‍🔥
-    <span>ask</span>
+    <img src="fire-heart.PNG" alt="">
   </button>
 </div>
 
 <script>
-// ❄️ KAR
 for(let i=0;i<120;i++){
   const s=document.createElement("div");
   s.className="snow";
