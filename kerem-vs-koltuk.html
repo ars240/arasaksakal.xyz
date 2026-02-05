@@ -16,7 +16,6 @@ html,body{
   font-family:system-ui,Arial;
 }
 
-/* VIDEO – KESİLMEZ */
 video{
   position:fixed;
   inset:0;
@@ -74,7 +73,6 @@ video{
 <video
   id="video"
   src="kerem-koltuk.mp4"
-  muted
   autoplay
   loop
   playsinline
@@ -91,6 +89,8 @@ const v = document.getElementById("video");
 const play = document.getElementById("play");
 const seek = document.getElementById("seek");
 const time = document.getElementById("time");
+
+let soundUnlocked = false;
 
 /* PLAY / PAUSE */
 play.onclick = ()=>{
@@ -119,9 +119,14 @@ seek.addEventListener("input", ()=>{
   }
 });
 
-/* AUTOPLAY FAILSAFE */
+/* 🔓 SES KİLİDİ – İLK TIK */
 document.addEventListener("click", ()=>{
-  if(v.paused) v.play().catch(()=>{});
+  if(!soundUnlocked){
+    v.muted = false;
+    v.volume = 0.8;
+    v.play().catch(()=>{});
+    soundUnlocked = true;
+  }
 },{once:true});
 </script>
 
