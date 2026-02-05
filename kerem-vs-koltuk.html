@@ -12,6 +12,7 @@ html,body{
   width:100%;
   height:100%;
   background:#000;
+  overflow:hidden;
   font-family:system-ui,Arial;
 }
 
@@ -25,7 +26,7 @@ video{
   background:#000;
 }
 
-/* KONTROL BAR */
+/* KONTROLLER */
 .controls{
   position:fixed;
   left:50%;
@@ -36,98 +37,93 @@ video{
   gap:14px;
   padding:10px 14px;
   border-radius:18px;
-  background:rgba(0,0,0,.55);
+  background:rgba(0,0,0,.6);
   backdrop-filter:blur(12px);
   -webkit-backdrop-filter:blur(12px);
   color:#fff;
   z-index:10;
 }
 
-/* PLAY / PAUSE */
 .controls button{
   background:none;
   border:none;
   color:white;
   font-size:18px;
   cursor:pointer;
-  opacity:.85;
 }
-.controls button:hover{opacity:1}
 
-/* SLIDER */
 .controls input[type="range"]{
   width:180px;
-  cursor:pointer;
 }
 
-/* SÜRE */
 .time{
   font-size:12px;
-  opacity:.75;
-  min-width:64px;
+  opacity:.8;
+  min-width:60px;
   text-align:right;
 }
 
-/* MOBİL */
 @media(max-width:600px){
-  .controls input[type="range"]{ width:120px; }
+  .controls input[type="range"]{width:120px;}
 }
 </style>
 </head>
 
 <body>
 
-<video id="video" src="kere-koltuk.mp4" loop></video>
+<video
+  id="video"
+  src="kerem-koltuk.mp4"
+  muted
+  autoplay
+  loop
+  playsinline
+></video>
 
 <div class="controls">
-  <button id="play">▶</button>
+  <button id="play">⏸</button>
   <input id="seek" type="range" min="0" max="100" value="0">
   <div class="time" id="time">0:00</div>
 </div>
 
 <script>
 const v = document.getElementById("video");
-const playBtn = document.getElementById("play");
+const play = document.getElementById("play");
 const seek = document.getElementById("seek");
 const time = document.getElementById("time");
 
-// autoplay (mobil uyumlu)
-document.addEventListener("click", ()=>{
-  if(v.paused){
-    v.play().catch(()=>{});
-    playBtn.textContent = "⏸";
-  }
-},{ once:true });
-
-// play / pause
-playBtn.onclick = ()=>{
+/* PLAY / PAUSE */
+play.onclick = ()=>{
   if(v.paused){
     v.play();
-    playBtn.textContent = "⏸";
+    play.textContent="⏸";
   }else{
     v.pause();
-    playBtn.textContent = "▶";
+    play.textContent="▶";
   }
 };
 
-// süre güncelle
+/* SÜRE */
 v.addEventListener("timeupdate", ()=>{
+  if(!v.duration) return;
+  seek.value = (v.currentTime / v.duration) * 100;
+  const m = Math.floor(v.currentTime/60);
+  const s = Math.floor(v.currentTime%60).toString().padStart(2,"0");
+  time.textContent = `${m}:${s}`;
+});
+
+/* SÜRÜKLE */
+seek.addEventListener("input", ()=>{
   if(v.duration){
-    seek.value = (v.currentTime / v.duration) * 100;
-    const m = Math.floor(v.currentTime / 60);
-    const s = Math.floor(v.currentTime % 60).toString().padStart(2,"0");
-    time.textContent = `${m}:${s}`;
+    v.currentTime = (seek.value/100) * v.duration;
   }
 });
 
-// sürükleyerek ileri geri
-seek.addEventListener("input", ()=>{
-  if(v.duration){
-    v.currentTime = (seek.value / 100) * v.duration;
-  }
-});
+/* AUTOPLAY FAILSAFE */
+document.addEventListener("click", ()=>{
+  if(v.paused) v.play().catch(()=>{});
+},{once:true});
 </script>
 
 </body>
 </html>
-
