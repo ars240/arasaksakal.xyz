@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Aras Aksakal</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Lobster&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
 *{box-sizing:border-box}
@@ -19,7 +19,7 @@ body{
   place-items:center;
   font-family:Inter,Arial,sans-serif;
   color:#fff;
-  background: radial-gradient(circle at top, #111, #000);
+  background:radial-gradient(circle at top, #111, #000);
 }
 
 /* ❄️ KAR */
@@ -34,108 +34,74 @@ body{
 }
 @keyframes fall{ to{ transform:translateY(110vh); } }
 
-/* 🪟 ANA KART */
-.card{
-  position:relative;
+/* 🧭 MERKEZ MENÜ */
+.menu{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(140px,1fr));
+  gap:26px;
   width:min(520px,92vw);
-  padding:36px 32px 28px;
-  border-radius:24px;
+  z-index:10;
+}
+
+.menu button{
+  font-size:34px;
+  padding:26px 18px;
+  border-radius:22px;
+  border:1px solid rgba(255,255,255,.15);
   background:rgba(255,255,255,.08);
   backdrop-filter:blur(14px);
-  border:1px solid rgba(255,255,255,.12);
-  box-shadow:0 0 60px rgba(255,255,255,.12);
-  text-align:center;
+  color:white;
   cursor:pointer;
-  transition:transform .1s linear;
-}
-h1{
-  margin:0;
-  font-family:Lobster,cursive;
-  font-size:42px;
-  text-shadow:0 0 18px rgba(255,255,255,.25);
-}
-.hint{
-  margin-top:10px;
-  font-size:12px;
-  letter-spacing:2px;
-  opacity:.6;
-  text-transform:lowercase;
+  transition:.2s;
+  box-shadow:0 0 40px rgba(255,255,255,.08);
 }
 
-/* 🔒 GİZLİ BUTONLAR */
-.secret-row{
-  position:fixed;
-  right:18px;
-  bottom:18px;
-  display:flex;
-  align-items:center;
-  gap:22px;
-  z-index:20;
+.menu button:hover{
+  transform:translateY(-6px) scale(1.05);
+  background:rgba(255,255,255,.16);
 }
-.secret-row img{ cursor:pointer; transition:.2s; object-fit:contain; }
 
-/* kitty */
-.kitty-btn img{ width:26px; height:26px; opacity:.7; }
-.kitty-btn img:hover{ opacity:1; transform:scale(1.05); }
-
-/* batu */
-.batu-btn img{ width:28px; height:28px; opacity:.6; }
-.batu-btn img:hover{ opacity:1; transform:scale(1.06); }
-
-/* fire */
-.fire-btn img{ width:22px; height:22px; opacity:.35; }
-.fire-btn img:hover{ opacity:1; transform:scale(1.1); }
-
-/* clown */
-.clown-btn img{ width:24px; height:24px; opacity:.30; }
-.clown-btn img:hover{ opacity:1; transform:scale(1.08); }
-
-/* fire-heart (PNG büyük harf) */
-.fireheart-btn img{ width:26px; height:26px; opacity:.35; }
-.fireheart-btn img:hover{ opacity:1; transform:scale(1.1); }
-
-/* 📱 MOBİL */
-@media(max-width:768px){
-  .secret-row{
-    right:50%;
-    transform:translateX(50%);
-    bottom:14px;
-  }
+.menu span{
+  display:block;
+  font-size:13px;
+  margin-top:8px;
+  opacity:.7;
+  letter-spacing:1px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="card" id="card">
-  <h1>Aras Aksakal</h1>
-  <div class="hint">(tıkla)</div>
-</div>
+<div class="menu">
+  <button onclick="location.href='hasan-gulay.html'">
+    🐱
+    <span>hasan</span>
+  </button>
 
-<div class="secret-row">
-  <div class="kitty-btn" onclick="location.href='hasan-gulay.html'">
-    <img src="hello-kitty.png" alt="Hasan Gülay">
-  </div>
+  <button onclick="location.href='batu-bera.html'">
+    🪨
+    <span>batu</span>
+  </button>
 
-  <div class="batu-btn" onclick="location.href='batu-bera.html'">
-    <img src="batu-logo.png" alt="Batu Bera">
-  </div>
+  <button onclick="location.href='fire.html'">
+    🔥
+    <span>fire</span>
+  </button>
 
-  <div class="fire-btn" onclick="location.href='fire.html'">
-    <img src="fire.png" alt="Fire">
-  </div>
+  <button onclick="location.href='akif.html'">
+    🤡
+    <span>akif</span>
+  </button>
 
-  <div class="clown-btn" onclick="location.href='akif.html'">
-    <img src="clown-emoji.png" alt="Akif">
-  </div>
-
-  <div class="fireheart-btn" onclick="location.href='akif-ask.html'">
-    <img src="fire-heart.PNG" alt="Akif Ask">
-  </div>
+  <button onclick="location.href='akif-ask.html'">
+    ❤️‍🔥
+    <span>ask</span>
+  </button>
 </div>
 
 <script>
-// ❄️ KAR – kesintisiz
+// ❄️ KAR
 for(let i=0;i<120;i++){
   const s=document.createElement("div");
   s.className="snow";
@@ -149,18 +115,6 @@ for(let i=0;i<120;i++){
   s.style.opacity=(0.3+Math.random()*0.7);
   document.body.appendChild(s);
 }
-
-// karta tıklama
-document.getElementById("card").addEventListener("click", ()=>location.href="links.html");
-
-// mouse tilt
-document.addEventListener("mousemove", e=>{
-  const cx=innerWidth/2, cy=innerHeight/2;
-  const dx=(e.clientX-cx)/30;
-  const dy=(e.clientY-cy)/30;
-  document.getElementById("card").style.transform =
-    `rotateY(${dx}deg) rotateX(${-dy}deg)`;
-});
 </script>
 
 </body>
