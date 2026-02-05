@@ -12,16 +12,16 @@ html,body{
   width:100%;
   height:100%;
   background:#000;
-  overflow:hidden;
 }
 
-/* FULL EKRAN VIDEO */
+/* VIDEO – KESİLMEZ */
 video{
   position:fixed;
   inset:0;
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit:contain;
+  background:#000;
 }
 
 /* GERİ */
@@ -58,7 +58,7 @@ video{
 ></video>
 
 <script>
-// mobilde autoplay için: ilk dokunuşta sesi aç
+// ilk etkileşimde sesi aç
 document.addEventListener("click", ()=>{
   const v=document.querySelector("video");
   if(v.muted){
